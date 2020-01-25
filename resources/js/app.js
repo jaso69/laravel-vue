@@ -28,13 +28,20 @@ Vue.use(Vuelidate);
 Vue.use(Router);
 Vue.use(Vuetify);
 
+window.VideoBus = new Vue();
+
 Vue.component('calendar', require('./components/Calendar').default);
 Vue.component('register', require('./components/Form_reg').default);
+Vue.component('alquiler_menu', require('./components/Alquiler_menu').default);
+Vue.component('alquiler_sonido', require('./components/Alquiler_sonido').default);
+Vue.component('alquiler_luces', require('./components/Alquiler_luces').default);
+Vue.component('index_show', require('./components/Index').default);
 
 /**********************rutas*************************************/
 let router = new Router({
     routes: [
-        {path:'/', component: require('./views/Login').default},
+        {path:'/', component: require('./views/Index').default},
+        {path:'/ingresar', component: require('./views/Login').default},
         {path:'/register', component: require('./views/Register').default},
         {path:'/users', component: require('./views/Users').default},
     ]
