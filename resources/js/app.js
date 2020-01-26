@@ -35,6 +35,7 @@ Vue.component('register', require('./components/Form_reg').default);
 Vue.component('alquiler_menu', require('./components/Alquiler_menu').default);
 Vue.component('alquiler_sonido', require('./components/Alquiler_sonido').default);
 Vue.component('alquiler_luces', require('./components/Alquiler_luces').default);
+Vue.component('alquiler_video', require('./components/Alquiler_video').default);
 Vue.component('index_show', require('./components/Index').default);
 
 /**********************rutas*************************************/

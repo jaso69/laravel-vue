@@ -2326,6 +2326,109 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Alquiler_video.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Alquiler_video.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      opcion_m: null,
+      op: null
+    };
+  },
+  methods: {
+    opcion: function opcion(op) {
+      console.log(op);
+      this.opcion_m = op;
+      VideoBus.$emit('opcion_m', this.opcion_m);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Calendar.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Calendar.vue?vue&type=script&lang=js& ***!
@@ -3170,13 +3273,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       opcion_m: 'menu',
       menu: true,
       sonido: false,
-      luces: false
+      luces: false,
+      video: false
     };
   },
   mounted: function mounted() {
@@ -3196,19 +3302,29 @@ __webpack_require__.r(__webpack_exports__);
       if (this.opcion_m == 'menu') {
         this.sonido = false;
         this.luces = false;
+        this.video = false;
         this.menu = true;
       }
 
       if (this.opcion_m == 'sonido') {
         this.menu = false;
         this.luces = false;
+        this.video = false;
         this.sonido = true;
       }
 
       if (this.opcion_m == 'luces') {
         this.menu = false;
         this.sonido = false;
+        this.video = false;
         this.luces = true;
+      }
+
+      if (this.opcion_m == 'video') {
+        this.menu = false;
+        this.sonido = false;
+        this.luces = false;
+        this.video = true;
       }
     }
   }
@@ -39799,6 +39915,227 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Alquiler_video.vue?vue&type=template&id=45c839f4&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Alquiler_video.vue?vue&type=template&id=45c839f4& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-list",
+        { attrs: { dense: "" } },
+        [
+          _c(
+            "v-list-item",
+            {
+              attrs: { link: "" },
+              on: {
+                click: function($event) {
+                  return _vm.opcion("menu")
+                }
+              }
+            },
+            [
+              _c("v-list-item-action", [_c("v-icon", [_vm._v("mdi-home")])], 1),
+              _vm._v(" "),
+              _c(
+                "v-list-item-content",
+                [_c("v-list-item-title", [_vm._v("Inicio")])],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "container text-center" }, [
+            _c("hr"),
+            _vm._v(" "),
+            _c("h4", [_vm._v("Video")]),
+            _vm._v(" "),
+            _c("hr")
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-list-item",
+            {
+              attrs: { link: "" },
+              on: {
+                click: function($event) {
+                  return _vm.opcion("completos")
+                }
+              }
+            },
+            [
+              _c(
+                "v-list-item-action",
+                [_c("v-icon", [_vm._v("mdi-television")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item-content",
+                [_c("v-list-item-title", [_vm._v("Pantallas TV")])],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-list-item",
+            {
+              attrs: { link: "" },
+              on: {
+                click: function($event) {
+                  return _vm.opcion("packs")
+                }
+              }
+            },
+            [
+              _c(
+                "v-list-item-action",
+                [_c("v-icon", [_vm._v("mdi-video-outline")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item-content",
+                [_c("v-list-item-title", [_vm._v("Proyectores de video")])],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-list-item",
+            {
+              attrs: { link: "" },
+              on: {
+                click: function($event) {
+                  return _vm.opcion("array")
+                }
+              }
+            },
+            [
+              _c(
+                "v-list-item-action",
+                [_c("v-icon", [_vm._v("mdi-projector-screen")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item-content",
+                [_c("v-list-item-title", [_vm._v("Pantallas de proyección")])],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-list-item",
+            {
+              attrs: { link: "" },
+              on: {
+                click: function($event) {
+                  return _vm.opcion("mesas")
+                }
+              }
+            },
+            [
+              _c(
+                "v-list-item-action",
+                [_c("v-icon", [_vm._v("mdi-monitor-multiple")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item-content",
+                [_c("v-list-item-title", [_vm._v("VideoWall")])],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-list-item",
+            {
+              attrs: { link: "" },
+              on: {
+                click: function($event) {
+                  return _vm.opcion("reproductores")
+                }
+              }
+            },
+            [
+              _c(
+                "v-list-item-action",
+                [_c("v-icon", [_vm._v("mdi-call-split")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item-content",
+                [_c("v-list-item-title", [_vm._v("Splitters/Procesadores")])],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-list-item",
+            {
+              attrs: { link: "" },
+              on: {
+                click: function($event) {
+                  return _vm.opcion("contacto")
+                }
+              }
+            },
+            [
+              _c(
+                "v-list-item-action",
+                [_c("v-icon", [_vm._v("mdi-contact-mail")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-item-content",
+                [_c("v-list-item-title", [_vm._v("Contacto")])],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Calendar.vue?vue&type=template&id=052a41a9&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Calendar.vue?vue&type=template&id=052a41a9& ***!
@@ -40885,7 +41222,9 @@ var render = function() {
           _vm._v(" "),
           _vm.sonido ? _c("alquiler_sonido") : _vm._e(),
           _vm._v(" "),
-          _vm.luces ? _c("alquiler_luces") : _vm._e()
+          _vm.luces ? _c("alquiler_luces") : _vm._e(),
+          _vm._v(" "),
+          _vm.video ? _c("alquiler_video") : _vm._e()
         ],
         1
       ),
@@ -99514,6 +99853,7 @@ Vue.component('register', __webpack_require__(/*! ./components/Form_reg */ "./re
 Vue.component('alquiler_menu', __webpack_require__(/*! ./components/Alquiler_menu */ "./resources/js/components/Alquiler_menu.vue")["default"]);
 Vue.component('alquiler_sonido', __webpack_require__(/*! ./components/Alquiler_sonido */ "./resources/js/components/Alquiler_sonido.vue")["default"]);
 Vue.component('alquiler_luces', __webpack_require__(/*! ./components/Alquiler_luces */ "./resources/js/components/Alquiler_luces.vue")["default"]);
+Vue.component('alquiler_video', __webpack_require__(/*! ./components/Alquiler_video */ "./resources/js/components/Alquiler_video.vue")["default"]);
 Vue.component('index_show', __webpack_require__(/*! ./components/Index */ "./resources/js/components/Index.vue")["default"]);
 /**********************rutas*************************************/
 
@@ -99804,6 +100144,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Alquiler_sonido_vue_vue_type_template_id_36316667___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Alquiler_sonido_vue_vue_type_template_id_36316667___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Alquiler_video.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/Alquiler_video.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Alquiler_video_vue_vue_type_template_id_45c839f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Alquiler_video.vue?vue&type=template&id=45c839f4& */ "./resources/js/components/Alquiler_video.vue?vue&type=template&id=45c839f4&");
+/* harmony import */ var _Alquiler_video_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Alquiler_video.vue?vue&type=script&lang=js& */ "./resources/js/components/Alquiler_video.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Alquiler_video_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Alquiler_video_vue_vue_type_template_id_45c839f4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Alquiler_video_vue_vue_type_template_id_45c839f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Alquiler_video.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Alquiler_video.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/Alquiler_video.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Alquiler_video_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Alquiler_video.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Alquiler_video.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Alquiler_video_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Alquiler_video.vue?vue&type=template&id=45c839f4&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/Alquiler_video.vue?vue&type=template&id=45c839f4& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Alquiler_video_vue_vue_type_template_id_45c839f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Alquiler_video.vue?vue&type=template&id=45c839f4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Alquiler_video.vue?vue&type=template&id=45c839f4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Alquiler_video_vue_vue_type_template_id_45c839f4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Alquiler_video_vue_vue_type_template_id_45c839f4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

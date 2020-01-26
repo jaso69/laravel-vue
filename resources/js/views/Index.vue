@@ -12,6 +12,8 @@
 
     <alquiler_luces v-if="luces"></alquiler_luces>
 
+    <alquiler_video v-if="video"></alquiler_video>
+
     </v-navigation-drawer>
 
     <v-app-bar
@@ -51,6 +53,7 @@
             menu: true,
             sonido: false,
             luces: false,
+            video: false,
         }),
 
         mounted(){
@@ -72,17 +75,26 @@
                 if (this.opcion_m == 'menu'){
                     this.sonido = false;
                     this.luces = false;
+                    this.video = false;
                     this.menu = true;
                 }
                 if (this.opcion_m == 'sonido'){
                     this.menu = false;
                     this.luces = false;
+                    this.video = false;
                     this.sonido = true;
                 }
                 if (this.opcion_m == 'luces'){
                     this.menu = false;
                     this.sonido = false;
+                    this.video = false;
                     this.luces = true;
+                }
+                if (this.opcion_m == 'video'){
+                    this.menu = false;
+                    this.sonido = false;
+                    this.luces = false;
+                    this.video = true;
                 }
             }
         },
