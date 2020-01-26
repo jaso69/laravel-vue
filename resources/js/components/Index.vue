@@ -1,7 +1,7 @@
 <template>
-<div class="d-flex justify-between mb-6">
+<div class="d-flex flex-wrap justify-content-between align-items-start">
        <v-card
-                class="mx-auto"
+                class="mx-auto my-2"
                 max-width="400"
               >
                 <v-img
@@ -38,7 +38,7 @@
             </v-card>
 
             <v-card
-                class="mx-auto"
+                class="mx-auto my-2"
                 max-width="400"
               >
                 <v-img
@@ -75,7 +75,7 @@
             </v-card>
 
          <v-card
-                class="mx-auto"
+                class="mx-auto my-2"
                 max-width="400"
               >
                 <v-img
@@ -112,7 +112,7 @@
             </v-card>
 
             <v-card
-                class="mx-auto"
+                class="mx-auto my-2"
                 max-width="400"
               >
                 <v-img

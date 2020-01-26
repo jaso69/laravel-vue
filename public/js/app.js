@@ -3170,11 +3170,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -40672,11 +40667,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "d-flex justify-between mb-6" },
+    {
+      staticClass: "d-flex flex-wrap justify-content-between align-items-start"
+    },
     [
       _c(
         "v-card",
-        { staticClass: "mx-auto", attrs: { "max-width": "400" } },
+        { staticClass: "mx-auto my-2", attrs: { "max-width": "400" } },
         [
           _c(
             "v-img",
@@ -40718,7 +40715,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-card",
-        { staticClass: "mx-auto", attrs: { "max-width": "400" } },
+        { staticClass: "mx-auto my-2", attrs: { "max-width": "400" } },
         [
           _c(
             "v-img",
@@ -40760,7 +40757,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-card",
-        { staticClass: "mx-auto", attrs: { "max-width": "400" } },
+        { staticClass: "mx-auto my-2", attrs: { "max-width": "400" } },
         [
           _c(
             "v-img",
@@ -40802,7 +40799,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-card",
-        { staticClass: "mx-auto", attrs: { "max-width": "400" } },
+        { staticClass: "mx-auto my-2", attrs: { "max-width": "400" } },
         [
           _c(
             "v-img",
@@ -40917,14 +40914,7 @@ var render = function() {
           _c(
             "v-container",
             { staticClass: "fill-height", attrs: { fluid: "" } },
-            [
-              _c(
-                "v-row",
-                { attrs: { align: "center", justify: "center" } },
-                [_c("index_show")],
-                1
-              )
-            ],
+            [_vm.menu ? _c("index_show") : _vm._e()],
             1
           )
         ],

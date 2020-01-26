@@ -28,14 +28,9 @@
         class="fill-height"
         fluid
       >
-        <v-row
-          align="center"
-          justify="center"
-        >
 
-           <index_show />
+           <index_show v-if="menu" />
             
-        </v-row>
       </v-container>
     </v-content>
     <v-footer
