@@ -59,7 +59,7 @@
                     :type="type"
                     @click:event="showEvent"
                     @click:more="viewDay"
-                    @click:date="viewDay"
+                    @click:date="diaEv('show')"
                     @click:day="prueba"
                     @change="updateRange"
                 ></v-calendar>
@@ -84,7 +84,7 @@
                                                       type="date"
                                                       v-model="inicio"
                                                       required>
-                                                      
+
                                         </v-text-field>
                                         <v-text-field label="Fin"
                                                       type="date"
@@ -95,10 +95,10 @@
                                     </v-row>
 
                                     <v-text-field label="color"
-                                                v-model="color" 
-                                                class="ma-2" 
+                                                v-model="color"
+                                                class="ma-2"
                                                 type="color">
-                                            Color                                  
+                                            Color
                                     </v-text-field>
 
                                     <v-card-actions>
@@ -125,6 +125,39 @@
                     </v-card>
                 </v-dialog>
 
+                <v-dialog
+                    v-model="dialogo"
+                    max-width="390"
+                >
+                    <v-card>
+                        <v-card-title class="headline">Aviso de borrado de datos</v-card-title>
+
+                        <v-card-text>
+                            Seguro deseas borrar este dato ??.
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+
+                            <v-btn
+                                color="green darken-1"
+                                text
+                                @click="dialogo = false, selectedOpen = false"
+                            >
+                                Cancelar
+                            </v-btn>
+
+                            <v-btn
+                                color="red"
+                                text
+                                @click="deleteEv()"
+                            >
+                                Borrar
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+
                 <v-dialog v-model="selectedOpen">
                     <v-card
                         color="grey lighten-4"
@@ -138,15 +171,15 @@
 
                             <v-toolbar-title>
 
-                                <span 
-                                    v-html="selectedEvent.name" 
+                                <span
+                                    v-html="selectedEvent.name"
                                     class="text-white">
                                 </span>
 
-                                
+
                             </v-toolbar-title>
                             <v-spacer></v-spacer>
-                           
+
                            <v-btn icon @click="deleteEvent(selectedEvent)">
                                 <v-icon>mdi-trash-can-outline</v-icon>
                             </v-btn>
@@ -155,15 +188,16 @@
 
                             <v-container  v-if="editing" class="bg-dark">
 
-                            <v-form @submit.prevent="updateEvent(selectedEvent)"> 
+                            <v-form @submit.prevent="updateEvent(selectedEvent)">
 
                                 <v-text-field label="Asunto"
                                         v-model="selectedEvent.name">
                                 </v-text-field>
 
-                                <v-text-field label="Detalles"
-                                        v-model="selectedEvent.details">
-                                </v-text-field>
+                                    <v-text-field label="Detalles"
+                                            v-model="selectedEvent.details">
+
+                                    </v-text-field>
 
                                 <v-row justify="space-around">
                                         <v-text-field label="Inicio"
@@ -180,9 +214,9 @@
                                     </v-row>
 
                                     <v-text-field label="Color"
-                                        v-model="selectedEvent.color" 
-                                        class="ma-2" 
-                                        type="color">                                  
+                                        v-model="selectedEvent.color"
+                                        class="ma-2"
+                                        type="color">
                                     </v-text-field>
 
                                     <v-btn text
@@ -196,15 +230,16 @@
                                 </v-form>
 
                             </v-container>
+                            <h5 v-else class="my-2">
+                                <span
+                                        v-html="selectedEvent.details"
+                                        class="text-dark">
 
-                            <span   v-else
-                                    v-html="selectedEvent.details"
-                                    class="text-dark"
-                            ></span>
-
+                                </span>
+                            </h5>
                         </v-card-text>
                         <v-card-actions>
-                    
+
                                 <v-btn text
                                     v-if="!editing"
                                     color="orange darken-4"
@@ -222,11 +257,12 @@
                                 </v-btn>
                         </v-card-actions>
                     </v-card>
-              
+
             </v-dialog>
             </v-sheet>
         </v-col>
     </v-row>
+
 </template>
 
 <script>
@@ -257,6 +293,8 @@
             dialog: false,
             editing: false,
             usuario: '',
+            dialogo: false,
+            opcion_m: null,
         }),
 
         computed: {
@@ -312,6 +350,11 @@
 
         methods: {
 
+            diaEv(op){
+                this.opcion_m = op;
+                VideoBus.$emit('show', this.events);
+            },
+
             prueba(event){
                 this.inicio = event.date;
                 this.fin = event.date;
@@ -343,8 +386,11 @@
 
             },
 
-            deleteEvent(selectedEvent){
-
+            deleteEvent(selectedEvent) {
+                this.dialogo = true;
+                this.selectedOpen = false;
+            },
+            deleteEv(){
                 axios.post('/notas/destroy', {
                    id: this.selectedEvent.id,
                 })
@@ -355,7 +401,7 @@
                 .catch(err => {
                     console.log(err.response.data)
                 });
-
+                this.dialogo = false;
                 this.getEvent();
 
             },
@@ -372,7 +418,7 @@
             },
 
             addEvents(){
-               
+
                 axios.post('/notas',{
                     user_id: this.usuario.id,
                     name: this.name,
@@ -388,7 +434,7 @@
                     console.log(err.response.data)
                 });
                 this.clear();
-                
+
             },
 
             clear(){

@@ -8,22 +8,17 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+
 if(localStorage.getItem('api_token')){
     window.axios.defaults.headers.common['Authorization'] ='Bearer ' + localStorage.getItem('api_token');
 }
+
 import Vuetify from 'vuetify';
 import Router from 'vue-router';
 import Vuelidate from 'vuelidate';
+
 Vue.use(Vuelidate);
 Vue.use(Router);
 Vue.use(Vuetify);
@@ -32,6 +27,7 @@ window.VideoBus = new Vue();
 
 Vue.component('calendar', require('./components/Calendar').default);
 Vue.component('register', require('./components/Form_reg').default);
+Vue.component('showork', require('./components/ShowWork').default);
 Vue.component('alquiler_menu', require('./components/Alquiler_menu').default);
 Vue.component('alquiler_sonido', require('./components/Alquiler_sonido').default);
 Vue.component('alquiler_luces', require('./components/Alquiler_luces').default);
@@ -39,10 +35,11 @@ Vue.component('alquiler_video', require('./components/Alquiler_video').default);
 Vue.component('index_show', require('./components/Index').default);
 
 /**********************rutas*************************************/
+
 let router = new Router({
     routes: [
-        {path:'/', component: require('./views/Index').default},
-        {path:'/ingresar', component: require('./views/Login').default},
+        {path:'/alquiler', component: require('./views/Index').default},
+        {path:'/', component: require('./views/Login').default},
         {path:'/register', component: require('./views/Register').default},
         {path:'/users', component: require('./views/Users').default},
     ]

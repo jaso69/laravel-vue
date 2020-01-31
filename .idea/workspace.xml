@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f3b15edb-57c4-4314-8a9f-d3269bcf179c" name="Default Changelist" comment="" />
+    <list default="true" id="f3b15edb-57c4-4314-8a9f-d3269bcf179c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/js/components/ShowWork.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Calendar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/Users.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Users.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +26,9 @@
         <option value="Vue Single File Component" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -121,7 +131,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
@@ -171,6 +181,13 @@
       <workItem from="1579112100082" duration="5149000" />
       <workItem from="1579177707243" duration="5367000" />
       <workItem from="1579451530731" duration="32000" />
+      <workItem from="1580061451257" duration="700000" />
+      <workItem from="1580075078975" duration="353000" />
+      <workItem from="1580075513804" duration="93000" />
+      <workItem from="1580075657984" duration="1345000" />
+      <workItem from="1580405079422" duration="7897000" />
+      <workItem from="1580491358020" duration="4044000" />
+      <workItem from="1580497177772" duration="5227000" />
     </task>
     <servers />
   </component>
@@ -186,14 +203,16 @@
       <screen x="1024" y="70" width="1366" height="768" />
     </state>
     <state x="1475" y="216" width="524" height="510" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1024.70.1366.768/0.97.1024.671@1024.70.1366.768" timestamp="1578653227758" />
-    <state x="1213" y="97" width="1022" height="737" key="SettingsEditor" timestamp="1578656387511">
-      <screen x="1024" y="70" width="1366" height="768" />
+    <state x="232" y="37" width="1022" height="737" key="SettingsEditor" timestamp="1580075960586">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="1213" y="97" width="1022" height="737" key="SettingsEditor/1024.70.1366.768/0.97.1024.671@1024.70.1366.768" timestamp="1578656387511" />
-    <state x="1398" y="288" key="com.intellij.ide.util.TipDialog" timestamp="1578600614798">
-      <screen x="1024" y="70" width="1366" height="768" />
+    <state x="232" y="37" key="SettingsEditor/1680.72.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1580075960586" />
+    <state x="2054" y="290" key="com.intellij.ide.util.TipDialog" timestamp="1580061465389">
+      <screen x="1680" y="72" width="1366" height="768" />
     </state>
     <state x="1398" y="288" key="com.intellij.ide.util.TipDialog/1024.70.1366.768/0.97.1024.671@1024.70.1366.768" timestamp="1578600614798" />
+    <state x="2054" y="290" key="com.intellij.ide.util.TipDialog/1680.72.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1580061465389" />
     <state x="503" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1579027239161">
       <screen x="0" y="27" width="1680" height="1023" />
     </state>
