@@ -6,12 +6,23 @@
             clipped
         >
             <v-list dense>
-                <v-list-item link @click="cal">
+                <v-list-item v-if="empleado" link @click="cal">
                     <v-list-item-action>
                         <v-icon>mdi-account</v-icon>
                     </v-list-item-action>
                     <v-list-item-content>
                         <v-list-item-title v-text="usuario.name"/>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item v-if="admin" link @click="empleados">
+                    <v-list-item-action>
+                        <v-icon>mdi-account-group</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>
+                            Usuarios
+                        </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
@@ -43,8 +54,9 @@
                     justify="center"
                 >
                     <v-col>
-                            <calendar v-if="calendario" />
-                            <showork :eventos="eventos" v-if="showork"/>
+                        <calendar v-if="calendario" />
+                        <showork :eventos="eventos" v-if="showork"/>
+                        <users-table v-if="admin_user"/>
                     </v-col>
                 </v-row>
             </v-container>
@@ -65,7 +77,12 @@
             drawer: null,
             users: [],
             usuario: '',
-            calendario: true,
+            role: 'admin',
+            role2: 'empleado',
+            admin: false,
+            admin_user: false,
+            empleado: false,
+            calendario: false,
             showork: false,
             eventos: null,
         }),
@@ -77,6 +94,16 @@
                 axios.get('/api/user')
                 .then(res => {
                     this.usuario = res.data;
+                    if (this.usuario.role === this.role){
+                        this.admin = true;
+                        this.empleado = true;
+                        this.calendario = true;
+                    }
+                    if (this.usuario.role === this.role2){
+                        this.admin = false;
+                        this.empleado = true;
+                        this.calendario = true;
+                    }
                 })
                 .catch(err => {
                     console.log(err.response.data)
@@ -87,7 +114,7 @@
             VideoBus.$on('show', events =>{
                 this.eventos = events;
                 this.mostrar();
-            })
+            });
 
         },
         methods: {
@@ -103,8 +130,14 @@
             },
             cal(){
               this.showork = false;
+              this.admin_user = false;
               this.calendario = true;
             },
+            empleados(){
+                this.showork = false;
+                this.calendario = false;
+                this.admin_user = true;
+            }
         }
     }
 </script>

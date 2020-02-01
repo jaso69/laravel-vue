@@ -46,5 +46,8 @@ Route::post('register', function(){
 Route::middleware('auth:api')->get('notas', function(){
     return response()->json(Agenda::where('user_id', auth()->user()->id)->get());
 });
+Route::middleware('auth:api')->get('users', function (){
+    return response()->json(User::all());
+});
 
 

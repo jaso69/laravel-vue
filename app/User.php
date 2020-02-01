@@ -41,4 +41,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Agenda');
     }
+    public function hasRole($role){
+        return $this->role === $role;
+    }
 }
