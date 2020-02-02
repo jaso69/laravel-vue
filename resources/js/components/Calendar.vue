@@ -94,12 +94,17 @@
                                         </v-text-field>
                                     </v-row>
 
-                                    <v-text-field label="color"
+                                   <!-- <v-text-field label="color"
                                                 v-model="color"
                                                 class="ma-2"
                                                 type="color">
                                             Color
-                                    </v-text-field>
+                                    </v-text-field> -->
+                                    <v-select
+                                        label="color"
+                                        :items="colors"
+                                        v-model="color"
+                                    ></v-select>
 
                                     <v-card-actions>
                                         <v-row justify="space-around">
@@ -213,11 +218,16 @@
                                         </v-text-field>
                                     </v-row>
 
-                                    <v-text-field label="Color"
+                               <!--    <v-text-field label="Color"
                                         v-model="selectedEvent.color"
                                         class="ma-2"
                                         type="color">
-                                    </v-text-field>
+                                    </v-text-field> -->
+                                    <v-select
+                                        label="color"
+                                        :items="colors"
+                                        v-model="selectedEvent.color"
+                                    ></v-select>
 
                                     <v-btn text
                                        color="success"
@@ -286,7 +296,7 @@
             selectedOpen: false,
             events: [],
             colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
-            color: 'red',
+            color: 'blue',
             names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
             name: '',
             details: '',

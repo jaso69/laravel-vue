@@ -29,6 +29,7 @@ Vue.component('calendar', require('./components/Calendar').default);
 Vue.component('register', require('./components/Form_reg').default);
 Vue.component('showork', require('./components/ShowWork').default);
 Vue.component('usersTable', require('./components/UsersTable').default);
+Vue.component('gastosForm', require('./components/GastosForm').default);
 Vue.component('alquiler_menu', require('./components/Alquiler_menu').default);
 Vue.component('alquiler_sonido', require('./components/Alquiler_sonido').default);
 Vue.component('alquiler_luces', require('./components/Alquiler_luces').default);

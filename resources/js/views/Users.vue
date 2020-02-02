@@ -6,7 +6,7 @@
             clipped
         >
             <v-list dense>
-                <v-list-item v-if="empleado" link @click="cal">
+                <v-list-item v-if="empleado" link @click="componentes('calendario')">
                     <v-list-item-action>
                         <v-icon>mdi-account</v-icon>
                     </v-list-item-action>
@@ -15,7 +15,18 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item v-if="admin" link @click="empleados">
+                <v-list-item v-if="empleado" link @click="componentes('gastos')">
+                    <v-list-item-action>
+                        <v-icon>mdi-currency-eur</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>
+                            Gastos
+                        </v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
+                <v-list-item v-if="admin" link @click="componentes('empleados')">
                     <v-list-item-action>
                         <v-icon>mdi-account-group</v-icon>
                     </v-list-item-action>
@@ -57,6 +68,7 @@
                         <calendar v-if="calendario" />
                         <showork :eventos="eventos" v-if="showork"/>
                         <users-table v-if="admin_user"/>
+                        <gastosForm v-if="admin_gastos" />
                     </v-col>
                 </v-row>
             </v-container>
@@ -81,6 +93,7 @@
             role2: 'empleado',
             admin: false,
             admin_user: false,
+            admin_gastos: false,
             empleado: false,
             calendario: false,
             showork: false,
@@ -113,7 +126,7 @@
             };
             VideoBus.$on('show', events =>{
                 this.eventos = events;
-                this.mostrar();
+                this.componentes('showork');
             });
 
         },
@@ -124,20 +137,28 @@
                 this.users = [];
                 this.$router.replace('/');
             },
-            mostrar(){
-                this.calendario = false;
-                this.showork = true;
+
+            componentes(op){
+                this.limpiar();
+                if (op === 'calendario') {
+                    this.calendario = true;
+                }
+                if (op === 'gastos') {
+                    this.admin_gastos = true;
+                }
+                if (op === 'empleados') {
+                    this.admin_user = true;
+                }
+                if (op === 'showork') {
+                    this.showork = true;
+                }
             },
-            cal(){
-              this.showork = false;
-              this.admin_user = false;
-              this.calendario = true;
-            },
-            empleados(){
+            limpiar(){
                 this.showork = false;
                 this.calendario = false;
-                this.admin_user = true;
-            }
-        }
+                this.admin_gastos = false;
+                this.admin_user = false;
+            },
+        },
     }
 </script>

@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Agenda;
-use Illuminate\Support\Facades;
 use App\User;
+use Illuminate\Http\Request;
 
-class AgendaController extends Controller
+class UsersController extends Controller
 {
     /**
-     * AgendaController constructor.
+     * UsersController constructor.
      */
     public function __construct()
     {
@@ -22,9 +20,10 @@ class AgendaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        return response()->json(Agenda::where('user_id', auth()->user()->id)->get());
+        //
     }
 
     /**
@@ -43,20 +42,9 @@ class AgendaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-
-        Agenda::create([
-            'user_id' => request('user_id'),
-            'name' => request('name'),
-            'details' => request('details'),
-            'start' => request('start'),
-            'end' => request('end'),
-            'color' => request('color'),
-        ]);
-
-        return response()->json(Agenda::where('user_id', request('user_id'))->get());
-
+        //
     }
 
     /**
@@ -86,30 +74,28 @@ class AgendaController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update()
     {
-        $nota = Agenda::where('id', request('id'))->first();
-        $nota->name = request('name');
-        $nota->details = request('details');
-        $nota->start = request('start');
-        $nota->end = request('end');
-        $nota->color = request('color');
-        $nota->update();
-        return response()->json(Agenda::where('user_id', request('user_id'))->get());
+        $usuario = User::where('id', request('id'))->first();
+        $usuario->name = request('name');
+        $usuario->email = request('email');
+        $usuario->role = request('role');
+        $usuario->update();
+        return response()->json(User::all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy()
     {
-        $nota = Agenda::where('id', request('id'))->first();
-        $nota->delete();
-        return response()->json(Agenda::where('user_id', request('user_id'))->get());
+        $usuario = User::where('id', request('id'))->first();
+        $usuario->delete();
+        return response()->json(User::all());
     }
 }

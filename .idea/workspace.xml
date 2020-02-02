@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3b15edb-57c4-4314-8a9f-d3269bcf179c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/js/components/GastosForm.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AgendaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AgendaController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Calendar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/UsersTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/UsersTable.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/views/Users.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Users.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +127,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1WAm3eAM5r99ejdcQhB2WpzZZRC" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -192,6 +197,9 @@
       <workItem from="1580491358020" duration="4044000" />
       <workItem from="1580497177772" duration="5649000" />
       <workItem from="1580548878928" duration="9925000" />
+      <workItem from="1580585261498" duration="6933000" />
+      <workItem from="1580638310766" duration="2080000" />
+      <workItem from="1580641330179" duration="11454000" />
     </task>
     <servers />
   </component>
@@ -207,6 +215,10 @@
       <screen x="1024" y="70" width="1366" height="768" />
     </state>
     <state x="1475" y="216" width="524" height="510" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1024.70.1366.768/0.97.1024.671@1024.70.1366.768" timestamp="1578653227758" />
+    <state x="510" y="231" width="651" height="597" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1580669521409">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="510" y="231" width="651" height="597" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1680.72.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1580669521409" />
     <state x="232" y="37" width="1022" height="737" key="SettingsEditor" timestamp="1580075960586">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
