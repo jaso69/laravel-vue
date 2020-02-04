@@ -68,7 +68,7 @@
                         <calendar v-if="calendario" />
                         <showork :eventos="eventos" v-if="showork"/>
                         <users-table v-if="admin_user"/>
-                        <gastosForm v-if="admin_gastos" />
+                        <gastosUser v-if="admin_gastos" />
                     </v-col>
                 </v-row>
             </v-container>

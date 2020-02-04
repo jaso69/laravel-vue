@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3b15edb-57c4-4314-8a9f-d3269bcf179c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/GastosForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/GastosUser.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AgendaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AgendaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Calendar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/UsersTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/UsersTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/GastosForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/GastosForm.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/views/Users.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Users.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,6 +196,7 @@
       <workItem from="1580585261498" duration="6933000" />
       <workItem from="1580638310766" duration="2080000" />
       <workItem from="1580641330179" duration="11454000" />
+      <workItem from="1580815158803" duration="16467000" />
     </task>
     <servers />
   </component>

@@ -3097,9 +3097,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GastosForm.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GastosUser.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GastosForm.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GastosUser.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -3191,19 +3191,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tipo_gasto: null,
-      descripcion: null,
-      importe: 0,
-      fecha: null,
-      usuario: null,
+      dialog: false,
       search: '',
+      usuario: null,
       headers: [{
-        text: 'Tipo de gasto',
+        text: 'Tipo de Gasto',
         align: 'left',
         sortable: false,
         value: 'tipo_gasto'
@@ -3216,8 +3211,25 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Fecha',
         value: 'fecha'
+      }, {
+        text: 'Actions',
+        value: 'action',
+        sortable: false
       }],
-      desserts: []
+      desserts: [],
+      editedIndex: -1,
+      editedItem: {
+        tipo_gasto: '',
+        descripcion: '',
+        importe: '',
+        fecha: null
+      },
+      defaultItem: {
+        tipo_gasto: '',
+        descripcion: '',
+        importe: '',
+        fecha: null
+      }
     };
   },
   mounted: function mounted() {
@@ -3228,39 +3240,69 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (err) {
       console.log(err.response.data);
     });
-    axios.get('/gasto').then(function (res) {
-      _this.desserts = res.data;
-    })["catch"](function (err) {
-      console.log(err.response.data);
-    });
+  },
+  computed: {
+    formTitle: function formTitle() {
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+    }
+  },
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
+  },
+  created: function created() {
+    this.initialize();
   },
   methods: {
-    incluir: function incluir() {
+    initialize: function initialize() {
       var _this2 = this;
 
-      if (this.tipo_gasto === null || this.importe === null || this.fecha === null) {
-        alert('Debe rellenar todos los campos');
+      axios.get('/gasto').then(function (res) {
+        _this2.desserts = res.data;
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    },
+    editItem: function editItem(item) {
+      this.editedIndex = this.desserts.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    deleteItem: function deleteItem(item) {
+      var index = this.desserts.indexOf(item);
+      confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1);
+    },
+    close: function close() {
+      var _this3 = this;
+
+      this.dialog = false;
+      setTimeout(function () {
+        _this3.editedItem = Object.assign({}, _this3.defaultItem);
+        _this3.editedIndex = -1;
+      }, 300);
+    },
+    save: function save() {
+      var _this4 = this;
+
+      if (this.editedIndex > -1) {
+        Object.assign(this.desserts[this.editedIndex], this.editedItem);
       } else {
+        this.desserts.push(this.editedItem);
         axios.post('/gasto', {
           user_id: this.usuario.id,
-          tipo_gasto: this.tipo_gasto,
-          descripcion: this.descripcion,
-          importe: this.importe,
-          fecha: this.fecha
+          tipo_gasto: this.editedItem.tipo_gasto,
+          descripcion: this.editedItem.descripcion,
+          importe: this.editedItem.importe,
+          fecha: this.editedItem.fecha
         }).then(function (res) {
-          _this2.desserts = res.data;
-
-          _this2.clear();
+          _this4.desserts = res.data;
         })["catch"](function (err) {
           console.log(err.response.data);
         });
       }
-    },
-    clear: function clear() {
-      this.tipo_gasto = null;
-      this.descripcion = null;
-      this.importe = null;
-      this.fecha = null;
+
+      this.close();
     }
   }
 });
@@ -41626,10 +41668,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GastosForm.vue?vue&type=template&id=5e9de46e&scoped=true&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GastosForm.vue?vue&type=template&id=5e9de46e&scoped=true& ***!
-  \*************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GastosUser.vue?vue&type=template&id=327fe7f5&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/GastosUser.vue?vue&type=template&id=327fe7f5& ***!
+  \*************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -41644,186 +41686,322 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "v-form",
-        [
-          _c(
-            "v-container",
-            [
-              _c(
-                "v-card",
-                [
-                  _c("v-card-title", [_vm._v("Gastos")]),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-text",
-                    [
-                      _c(
-                        "v-row",
-                        [
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "12", md: "3" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Tipo de gasto", required: "" },
-                                model: {
-                                  value: _vm.tipo_gasto,
-                                  callback: function($$v) {
-                                    _vm.tipo_gasto = $$v
-                                  },
-                                  expression: "tipo_gasto"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "12", md: "3" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "Descripcion" },
-                                model: {
-                                  value: _vm.descripcion,
-                                  callback: function($$v) {
-                                    _vm.descripcion = $$v
-                                  },
-                                  expression: "descripcion"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "12", md: "3" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  label: "Importe",
-                                  type: "numeric",
-                                  required: ""
-                                },
-                                model: {
-                                  value: _vm.importe,
-                                  callback: function($$v) {
-                                    _vm.importe = $$v
-                                  },
-                                  expression: "importe"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "12", md: "3" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  label: "Fecha",
-                                  type: "date",
-                                  required: ""
-                                },
-                                model: {
-                                  value: _vm.fecha,
-                                  callback: function($$v) {
-                                    _vm.fecha = $$v
-                                  },
-                                  expression: "fecha"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-actions",
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: {
-                            text: "",
-                            color: "lime accent-3",
-                            type: "submit"
-                          },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.incluir($event)
+      _c("v-data-table", {
+        staticClass: "elevation-1",
+        attrs: {
+          headers: _vm.headers,
+          items: _vm.desserts,
+          search: _vm.search,
+          "sort-by": "fecha"
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "top",
+            fn: function() {
+              return [
+                _c("v-toolbar-title", [_vm._v("Gastos")]),
+                _vm._v(" "),
+                _c(
+                  "v-toolbar",
+                  { attrs: { flat: "", color: "dark" } },
+                  [
+                    _c("v-text-field", {
+                      attrs: {
+                        "append-icon": "mdi-magnify",
+                        label: "Search",
+                        "single-line": "",
+                        "hide-details": ""
+                      },
+                      model: {
+                        value: _vm.search,
+                        callback: function($$v) {
+                          _vm.search = $$v
+                        },
+                        expression: "search"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("v-divider", {
+                      staticClass: "mx-4",
+                      attrs: { inset: "", vertical: "" }
+                    }),
+                    _vm._v(" "),
+                    _c("v-spacer"),
+                    _vm._v(" "),
+                    _c(
+                      "v-dialog",
+                      {
+                        attrs: { "max-width": "500px" },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "activator",
+                            fn: function(ref) {
+                              var on = ref.on
+                              return [
+                                _c(
+                                  "v-btn",
+                                  _vm._g(
+                                    {
+                                      staticClass: "mb-2",
+                                      attrs: { color: "primary", dark: "" }
+                                    },
+                                    on
+                                  ),
+                                  [_vm._v("Nuevo gasto")]
+                                )
+                              ]
                             }
                           }
-                        },
-                        [
-                          _c("v-icon", [_vm._v("mdi-plus-outline")]),
-                          _vm._v(
-                            "\n                        Añadir\n                    "
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-card",
-        [
-          _c(
-            "v-card-title",
-            [
-              _vm._v("\n            Gastos\n            "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: {
-                  "append-icon": "mdi-magnify",
-                  label: "Search",
-                  "single-line": "",
-                  "hide-details": ""
-                },
-                model: {
-                  value: _vm.search,
-                  callback: function($$v) {
-                    _vm.search = $$v
+                        ]),
+                        model: {
+                          value: _vm.dialog,
+                          callback: function($$v) {
+                            _vm.dialog = $$v
+                          },
+                          expression: "dialog"
+                        }
+                      },
+                      [
+                        _vm._v(" "),
+                        _c(
+                          "v-card",
+                          [
+                            _c("v-card-title", [
+                              _c("span", { staticClass: "headline" }, [
+                                _vm._v(_vm._s(_vm.formTitle))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "v-card-text",
+                              [
+                                _c(
+                                  "v-container",
+                                  [
+                                    _c(
+                                      "v-row",
+                                      [
+                                        _c(
+                                          "v-col",
+                                          {
+                                            attrs: {
+                                              cols: "12",
+                                              sm: "6",
+                                              md: "4"
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Tipo de gasto" },
+                                              model: {
+                                                value:
+                                                  _vm.editedItem.tipo_gasto,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "tipo_gasto",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.tipo_gasto"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-col",
+                                          {
+                                            attrs: {
+                                              cols: "12",
+                                              sm: "6",
+                                              md: "4"
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Descripcion" },
+                                              model: {
+                                                value:
+                                                  _vm.editedItem.descripcion,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "descripcion",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.descripcion"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-col",
+                                          {
+                                            attrs: {
+                                              cols: "12",
+                                              sm: "6",
+                                              md: "4"
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: {
+                                                label: "Importe",
+                                                type: "numeric"
+                                              },
+                                              model: {
+                                                value: _vm.editedItem.importe,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "importe",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "editedItem.importe"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-col",
+                                          {
+                                            attrs: {
+                                              cols: "12",
+                                              sm: "6",
+                                              md: "4"
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: {
+                                                label: "Fecha",
+                                                type: "date"
+                                              },
+                                              model: {
+                                                value: _vm.editedItem.fecha,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "fecha",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "editedItem.fecha"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-card-actions",
+                              [
+                                _c("v-spacer"),
+                                _vm._v(" "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "blue darken-1", text: "" },
+                                    on: { click: _vm.close }
+                                  },
+                                  [_vm._v("Cancel")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "blue darken-1", text: "" },
+                                    on: { click: _vm.save }
+                                  },
+                                  [_vm._v("Save")]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "item.action",
+            fn: function(ref) {
+              var item = ref.item
+              return [
+                _c(
+                  "v-icon",
+                  {
+                    staticClass: "mr-2",
+                    attrs: { small: "" },
+                    on: {
+                      click: function($event) {
+                        return _vm.editItem(item)
+                      }
+                    }
                   },
-                  expression: "search"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("v-data-table", {
-            attrs: {
-              headers: _vm.headers,
-              items: _vm.desserts,
-              search: _vm.search
+                  [_vm._v("\n                    mdi-pencil\n                ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-icon",
+                  {
+                    attrs: { small: "" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteItem(item)
+                      }
+                    }
+                  },
+                  [_vm._v("\n                    mdi-delete\n                ")]
+                )
+              ]
             }
-          })
-        ],
-        1
-      )
+          },
+          {
+            key: "no-data",
+            fn: function() {
+              return [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "primary" },
+                    on: { click: _vm.initialize }
+                  },
+                  [_vm._v("Reset")]
+                )
+              ]
+            },
+            proxy: true
+          }
+        ])
+      })
     ],
     1
   )
@@ -43137,7 +43315,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm.admin_user ? _c("users-table") : _vm._e(),
                       _vm._v(" "),
-                      _vm.admin_gastos ? _c("gastosForm") : _vm._e()
+                      _vm.admin_gastos ? _c("gastosUser") : _vm._e()
                     ],
                     1
                   )
@@ -101270,7 +101448,7 @@ Vue.component('calendar', __webpack_require__(/*! ./components/Calendar */ "./re
 Vue.component('register', __webpack_require__(/*! ./components/Form_reg */ "./resources/js/components/Form_reg.vue")["default"]);
 Vue.component('showork', __webpack_require__(/*! ./components/ShowWork */ "./resources/js/components/ShowWork.vue")["default"]);
 Vue.component('usersTable', __webpack_require__(/*! ./components/UsersTable */ "./resources/js/components/UsersTable.vue")["default"]);
-Vue.component('gastosForm', __webpack_require__(/*! ./components/GastosForm */ "./resources/js/components/GastosForm.vue")["default"]);
+Vue.component('gastosUser', __webpack_require__(/*! ./components/GastosUser */ "./resources/js/components/GastosUser.vue")["default"]);
 Vue.component('alquiler_menu', __webpack_require__(/*! ./components/Alquiler_menu */ "./resources/js/components/Alquiler_menu.vue")["default"]);
 Vue.component('alquiler_sonido', __webpack_require__(/*! ./components/Alquiler_sonido */ "./resources/js/components/Alquiler_sonido.vue")["default"]);
 Vue.component('alquiler_luces', __webpack_require__(/*! ./components/Alquiler_luces */ "./resources/js/components/Alquiler_luces.vue")["default"]);
@@ -101777,17 +101955,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/GastosForm.vue":
+/***/ "./resources/js/components/GastosUser.vue":
 /*!************************************************!*\
-  !*** ./resources/js/components/GastosForm.vue ***!
+  !*** ./resources/js/components/GastosUser.vue ***!
   \************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _GastosForm_vue_vue_type_template_id_5e9de46e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GastosForm.vue?vue&type=template&id=5e9de46e&scoped=true& */ "./resources/js/components/GastosForm.vue?vue&type=template&id=5e9de46e&scoped=true&");
-/* harmony import */ var _GastosForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GastosForm.vue?vue&type=script&lang=js& */ "./resources/js/components/GastosForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _GastosUser_vue_vue_type_template_id_327fe7f5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GastosUser.vue?vue&type=template&id=327fe7f5& */ "./resources/js/components/GastosUser.vue?vue&type=template&id=327fe7f5&");
+/* harmony import */ var _GastosUser_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GastosUser.vue?vue&type=script&lang=js& */ "./resources/js/components/GastosUser.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -101797,50 +101975,50 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _GastosForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _GastosForm_vue_vue_type_template_id_5e9de46e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _GastosForm_vue_vue_type_template_id_5e9de46e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _GastosUser_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _GastosUser_vue_vue_type_template_id_327fe7f5___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _GastosUser_vue_vue_type_template_id_327fe7f5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "5e9de46e",
+  null,
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/GastosForm.vue"
+component.options.__file = "resources/js/components/GastosUser.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/GastosForm.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/GastosUser.vue?vue&type=script&lang=js&":
 /*!*************************************************************************!*\
-  !*** ./resources/js/components/GastosForm.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/GastosUser.vue?vue&type=script&lang=js& ***!
   \*************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GastosForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./GastosForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GastosForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GastosForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GastosUser_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./GastosUser.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GastosUser.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GastosUser_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/GastosForm.vue?vue&type=template&id=5e9de46e&scoped=true&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/GastosForm.vue?vue&type=template&id=5e9de46e&scoped=true& ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/components/GastosUser.vue?vue&type=template&id=327fe7f5&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/GastosUser.vue?vue&type=template&id=327fe7f5& ***!
+  \*******************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GastosForm_vue_vue_type_template_id_5e9de46e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./GastosForm.vue?vue&type=template&id=5e9de46e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GastosForm.vue?vue&type=template&id=5e9de46e&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GastosForm_vue_vue_type_template_id_5e9de46e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GastosUser_vue_vue_type_template_id_327fe7f5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./GastosUser.vue?vue&type=template&id=327fe7f5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/GastosUser.vue?vue&type=template&id=327fe7f5&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GastosUser_vue_vue_type_template_id_327fe7f5___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GastosForm_vue_vue_type_template_id_5e9de46e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GastosUser_vue_vue_type_template_id_327fe7f5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
