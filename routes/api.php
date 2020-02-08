@@ -23,13 +23,12 @@ Route::post('login', function (){
     if($user = User::whereEmail(request('email'))->first() ){
         if (Hash::check(request('password'), $user->password) ){
             return response()->json([
-                'message' => 'hola' . $user->name,
                 'api_token' => $user->api_token,
             ], 200);
         }
     }
     return response()->json([
-        'message' => 'Inutil no te sabes tus putas credenciales',
+        'message' => 'Tus credenciales son incorrectas',
         'api_token' => null,
     ], 401);
 });

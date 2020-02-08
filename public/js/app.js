@@ -2947,6 +2947,316 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comunidades.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Comunidades.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dialog: false,
+      search: '',
+      eliminar: null,
+      dialogo: false,
+      headers: [{
+        text: 'Calle',
+        align: 'left',
+        value: 'calle'
+      }, {
+        text: 'Numero',
+        value: 'numero'
+      }, {
+        text: 'Municipio',
+        value: 'municipio'
+      }, {
+        text: 'Provincia',
+        value: 'provincia'
+      }, {
+        text: 'Codigo postal',
+        value: 'codigo_postal'
+      }, {
+        text: 'Actions',
+        value: 'action',
+        sortable: false
+      }],
+      desserts: [],
+      editedIndex: -1,
+      editedItem: {
+        calle: '',
+        numero: '',
+        municipio: '',
+        provincia: '',
+        codigo_postal: ''
+      },
+      defaultItem: {
+        calle: '',
+        numero: '',
+        municipio: '',
+        provincia: '',
+        codigo_postal: ''
+      }
+    };
+  },
+  computed: {
+    formTitle: function formTitle() {
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+    }
+  },
+  watch: {
+    dialog: function dialog(val) {
+      val || this.close();
+    }
+  },
+  created: function created() {
+    this.initialize();
+  },
+  methods: {
+    initialize: function initialize() {
+      var _this = this;
+
+      axios.get('/comunidades').then(function (res) {
+        _this.desserts = res.data;
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    },
+    editItem: function editItem(item) {
+      this.editedIndex = this.desserts.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    deleteItem: function deleteItem(item) {
+      this.editedIndex = this.desserts.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.eliminar = this.editedItem;
+      this.dialogo = true;
+    },
+    borrar: function borrar() {
+      var _this2 = this;
+
+      axios.post('/comunidades/destroy', {
+        id: this.eliminar.id
+      }).then(function (res) {
+        _this2.initialize();
+
+        _this2.eliminar = null;
+        _this2.dialogo = false;
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    },
+    close: function close() {
+      var _this3 = this;
+
+      this.dialog = false;
+      setTimeout(function () {
+        _this3.editedItem = Object.assign({}, _this3.defaultItem);
+        _this3.editedIndex = -1;
+      }, 300);
+    },
+    save: function save() {
+      var _this4 = this;
+
+      if (this.editedIndex > -1) {
+        axios.post('/comunidades/update', {
+          id: this.editedItem.id,
+          calle: this.editedItem.calle,
+          numero: this.editedItem.numero,
+          municipio: this.editedItem.municipio,
+          provincia: this.editedItem.provincia,
+          codigo_postal: this.editedItem.codigo_postal
+        }).then(function (res) {
+          _this4.initialize();
+        })["catch"](function (err) {
+          console.log(err.response.data);
+        }); //Object.assign(this.desserts[this.editedIndex], this.editedItem)
+      } else {
+        this.desserts.push(this.editedItem);
+        axios.post('/comunidades', {
+          calle: this.editedItem.calle,
+          numero: this.editedItem.numero,
+          municipio: this.editedItem.municipio,
+          provincia: this.editedItem.provincia,
+          codigo_postal: this.editedItem.codigo_postal
+        }).then(function (res) {
+          _this4.initialize();
+        })["catch"](function (err) {
+          console.log(err.response.data);
+        });
+      }
+
+      this.close();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Form_reg.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Form_reg.vue?vue&type=script&lang=js& ***!
@@ -3106,6 +3416,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -3944,10 +4256,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      form: {}
+      form: {},
+      dialog: false
     };
   },
   created: function created() {
@@ -3963,7 +4310,8 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$router.replace('users');
       })["catch"](function (err) {
-        alert(err.response.data.message);
+        console.log(err.response.data.message);
+        _this.dialog = true;
       });
     },
     register: function register() {
@@ -4137,6 +4485,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     source: String
@@ -4154,6 +4514,7 @@ __webpack_require__.r(__webpack_exports__);
       empleado: false,
       calendario: false,
       showork: false,
+      comunidad: false,
       eventos: null
     };
   },
@@ -4216,12 +4577,17 @@ __webpack_require__.r(__webpack_exports__);
       if (op === 'showork') {
         this.showork = true;
       }
+
+      if (op === 'comunidad') {
+        this.comunidad = true;
+      }
     },
     limpiar: function limpiar() {
       this.showork = false;
       this.calendario = false;
       this.admin_gastos = false;
       this.admin_user = false;
+      this.comunidad = false;
     }
   }
 });
@@ -41530,6 +41896,568 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comunidades.vue?vue&type=template&id=7bd093eb&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Comunidades.vue?vue&type=template&id=7bd093eb& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("v-data-table", {
+        staticClass: "elevation-1",
+        attrs: {
+          headers: _vm.headers,
+          items: _vm.desserts,
+          search: _vm.search,
+          "sort-by": "calle"
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "top",
+            fn: function() {
+              return [
+                _c("v-toolbar-title", { staticClass: "text-center py-2" }, [
+                  _c("h4", [_vm._v("Comunidades")])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "v-toolbar",
+                  { attrs: { flat: "", color: "dark" } },
+                  [
+                    _c("v-text-field", {
+                      attrs: {
+                        "append-icon": "mdi-magnify",
+                        label: "Search",
+                        "single-line": "",
+                        "hide-details": ""
+                      },
+                      model: {
+                        value: _vm.search,
+                        callback: function($$v) {
+                          _vm.search = $$v
+                        },
+                        expression: "search"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("v-divider", {
+                      staticClass: "mx-4",
+                      attrs: { inset: "", vertical: "" }
+                    }),
+                    _vm._v(" "),
+                    _c("v-spacer"),
+                    _vm._v(" "),
+                    _c(
+                      "v-dialog",
+                      {
+                        attrs: { "max-width": "500px" },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "activator",
+                            fn: function(ref) {
+                              var on = ref.on
+                              return [
+                                _c(
+                                  "v-btn",
+                                  _vm._g(
+                                    {
+                                      staticClass: "mb-2",
+                                      attrs: { color: "primary", dark: "" }
+                                    },
+                                    on
+                                  ),
+                                  [
+                                    _c("v-icon", [_vm._v("mdi-plus-thick")]),
+                                    _vm._v(
+                                      "\n                            Nueva\n                        "
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.dialog,
+                          callback: function($$v) {
+                            _vm.dialog = $$v
+                          },
+                          expression: "dialog"
+                        }
+                      },
+                      [
+                        _vm._v(" "),
+                        _c(
+                          "v-card",
+                          [
+                            _c("v-card-title", [
+                              _c("span", { staticClass: "headline" }, [
+                                _vm._v("Comunidad")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "v-card-text",
+                              [
+                                _c(
+                                  "v-container",
+                                  [
+                                    _c(
+                                      "v-row",
+                                      [
+                                        _c(
+                                          "v-col",
+                                          {
+                                            attrs: {
+                                              cols: "12",
+                                              sm: "6",
+                                              md: "4"
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Calle" },
+                                              model: {
+                                                value: _vm.editedItem.calle,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "calle",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "editedItem.calle"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-col",
+                                          {
+                                            attrs: {
+                                              cols: "12",
+                                              sm: "6",
+                                              md: "4"
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Numero" },
+                                              model: {
+                                                value: _vm.editedItem.numero,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "numero",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "editedItem.numero"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-col",
+                                          {
+                                            attrs: {
+                                              cols: "12",
+                                              sm: "6",
+                                              md: "4"
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Municipio" },
+                                              model: {
+                                                value: _vm.editedItem.municipio,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "municipio",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.municipio"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-col",
+                                          {
+                                            attrs: {
+                                              cols: "12",
+                                              sm: "6",
+                                              md: "4"
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Provincia" },
+                                              model: {
+                                                value: _vm.editedItem.provincia,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "provincia",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.provincia"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-col",
+                                          {
+                                            attrs: {
+                                              cols: "12",
+                                              sm: "6",
+                                              md: "4"
+                                            }
+                                          },
+                                          [
+                                            _c("v-text-field", {
+                                              attrs: { label: "Codigo postal" },
+                                              model: {
+                                                value:
+                                                  _vm.editedItem.codigo_postal,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    _vm.editedItem,
+                                                    "codigo_postal",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "editedItem.codigo_postal"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-card-actions",
+                              { attrs: { justify: "space-around" } },
+                              [
+                                _c("v-spacer"),
+                                _vm._v(" "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "red", text: "" },
+                                    on: { click: _vm.close }
+                                  },
+                                  [
+                                    _c("v-icon", [_vm._v("mdi-close-outline")]),
+                                    _vm._v(
+                                      "\n                                Cancel\n                            "
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "cyan", text: "" },
+                                    on: { click: _vm.save }
+                                  },
+                                  [
+                                    _c("v-icon", [
+                                      _vm._v("mdi-pencil-outline")
+                                    ]),
+                                    _vm._v(
+                                      "\n                                Save\n                            "
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "item.action",
+            fn: function(ref) {
+              var item = ref.item
+              return [
+                _c(
+                  "v-tooltip",
+                  {
+                    attrs: { left: "" },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "activator",
+                          fn: function(ref) {
+                            var on = ref.on
+                            return [
+                              _c(
+                                "v-icon",
+                                _vm._g(
+                                  {
+                                    staticClass: "mr-2",
+                                    attrs: { dark: "", color: "success" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editItem(item)
+                                      }
+                                    }
+                                  },
+                                  on
+                                ),
+                                [
+                                  _vm._v(
+                                    "\n                        mdi-door-closed\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c("span", { staticClass: "success p-2" }, [
+                      _vm._v("Viviendas")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-tooltip",
+                  {
+                    attrs: { top: "" },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "activator",
+                          fn: function(ref) {
+                            var on = ref.on
+                            return [
+                              _c(
+                                "v-icon",
+                                _vm._g(
+                                  {
+                                    staticClass: "mr-2",
+                                    attrs: { dark: "", color: "cyan" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editItem(item)
+                                      }
+                                    }
+                                  },
+                                  on
+                                ),
+                                [
+                                  _vm._v(
+                                    "\n                        mdi-pencil\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c("span", { staticClass: "cyan p-2" }, [_vm._v("Editar")])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-tooltip",
+                  {
+                    attrs: { top: "" },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "activator",
+                          fn: function(ref) {
+                            var on = ref.on
+                            return [
+                              _c(
+                                "v-icon",
+                                _vm._g(
+                                  {
+                                    staticClass: "mr-2",
+                                    attrs: { dark: "", color: "red" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteItem(item)
+                                      }
+                                    }
+                                  },
+                                  on
+                                ),
+                                [
+                                  _vm._v(
+                                    "\n                        mdi-delete\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c("span", { staticClass: "red p-2" }, [_vm._v("Borrar")])
+                  ]
+                )
+              ]
+            }
+          },
+          {
+            key: "no-data",
+            fn: function() {
+              return [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "primary" },
+                    on: { click: _vm.initialize }
+                  },
+                  [_vm._v("Recargar")]
+                )
+              ]
+            },
+            proxy: true
+          }
+        ])
+      }),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "390" },
+          model: {
+            value: _vm.dialogo,
+            callback: function($$v) {
+              _vm.dialogo = $$v
+            },
+            expression: "dialogo"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", { staticClass: "headline" }, [
+                _vm._v("Aviso de borrado de Comunidad")
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "\n                Seguro deseas borrar esta Comunidad ??.\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "green darken-1", text: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialogo = false
+                        }
+                      }
+                    },
+                    [_vm._v("\n                    Cancelar\n                ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red", text: "" },
+                      on: { click: _vm.borrar }
+                    },
+                    [_vm._v("\n                    Borrar\n                ")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Form_reg.vue?vue&type=template&id=713b1384&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Form_reg.vue?vue&type=template&id=713b1384& ***!
@@ -41959,7 +42887,7 @@ var render = function() {
                   "v-icon",
                   {
                     staticClass: "mr-2",
-                    attrs: { small: "" },
+                    attrs: { dark: "", color: "cyan" },
                     on: {
                       click: function($event) {
                         return _vm.editItem(item)
@@ -41972,7 +42900,7 @@ var render = function() {
                 _c(
                   "v-icon",
                   {
-                    attrs: { small: "" },
+                    attrs: { dark: "", color: "red" },
                     on: {
                       click: function($event) {
                         return _vm.deleteItem(item)
@@ -42988,6 +43916,84 @@ var render = function() {
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-row",
+        { attrs: { justify: "center" } },
+        [
+          _c(
+            "v-btn",
+            {
+              attrs: { color: "primary", dark: "" },
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  _vm.dialog = true
+                }
+              }
+            },
+            [_vm._v("\n            Open Dialog\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "v-dialog",
+            {
+              attrs: { "max-width": "390" },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
+              }
+            },
+            [
+              _c(
+                "v-card",
+                [
+                  _c("v-card-title", { staticClass: "headline" }, [
+                    _vm._v("Error en la autenticación")
+                  ]),
+                  _vm._v(" "),
+                  _c("v-card-text", [
+                    _vm._v(
+                      "\n                    Sus credenciales no concuerdan con nuestros registros\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    [
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { color: "green darken-1", text: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.dialog = false
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Aceptar\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
       )
     ],
     1
@@ -43189,6 +44195,40 @@ var render = function() {
                       attrs: { link: "" },
                       on: {
                         click: function($event) {
+                          return _vm.componentes("comunidad")
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "v-list-item-action",
+                        [_c("v-icon", [_vm._v("mdi-office-building")])],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-content",
+                        [
+                          _c("v-list-item-title", [
+                            _vm._v(
+                              "\n                        Comunidades\n                    "
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.empleado
+                ? _c(
+                    "v-list-item",
+                    {
+                      attrs: { link: "" },
+                      on: {
+                        click: function($event) {
                           return _vm.componentes("gastos")
                         }
                       }
@@ -43314,6 +44354,8 @@ var render = function() {
                         : _vm._e(),
                       _vm._v(" "),
                       _vm.admin_user ? _c("users-table") : _vm._e(),
+                      _vm._v(" "),
+                      _vm.comunidad ? _c("comunidades") : _vm._e(),
                       _vm._v(" "),
                       _vm.admin_gastos ? _c("gastosUser") : _vm._e()
                     ],
@@ -101448,6 +102490,7 @@ Vue.component('calendar', __webpack_require__(/*! ./components/Calendar */ "./re
 Vue.component('register', __webpack_require__(/*! ./components/Form_reg */ "./resources/js/components/Form_reg.vue")["default"]);
 Vue.component('showork', __webpack_require__(/*! ./components/ShowWork */ "./resources/js/components/ShowWork.vue")["default"]);
 Vue.component('usersTable', __webpack_require__(/*! ./components/UsersTable */ "./resources/js/components/UsersTable.vue")["default"]);
+Vue.component('comunidades', __webpack_require__(/*! ./components/Comunidades */ "./resources/js/components/Comunidades.vue")["default"]);
 Vue.component('gastosUser', __webpack_require__(/*! ./components/GastosUser */ "./resources/js/components/GastosUser.vue")["default"]);
 Vue.component('alquiler_menu', __webpack_require__(/*! ./components/Alquiler_menu */ "./resources/js/components/Alquiler_menu.vue")["default"]);
 Vue.component('alquiler_sonido', __webpack_require__(/*! ./components/Alquiler_sonido */ "./resources/js/components/Alquiler_sonido.vue")["default"]);
@@ -101881,6 +102924,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Calendar_vue_vue_type_template_id_052a41a9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Calendar_vue_vue_type_template_id_052a41a9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Comunidades.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/Comunidades.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Comunidades_vue_vue_type_template_id_7bd093eb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Comunidades.vue?vue&type=template&id=7bd093eb& */ "./resources/js/components/Comunidades.vue?vue&type=template&id=7bd093eb&");
+/* harmony import */ var _Comunidades_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Comunidades.vue?vue&type=script&lang=js& */ "./resources/js/components/Comunidades.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Comunidades_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Comunidades_vue_vue_type_template_id_7bd093eb___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Comunidades_vue_vue_type_template_id_7bd093eb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Comunidades.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Comunidades.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Comunidades.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Comunidades_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Comunidades.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comunidades.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Comunidades_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Comunidades.vue?vue&type=template&id=7bd093eb&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/Comunidades.vue?vue&type=template&id=7bd093eb& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Comunidades_vue_vue_type_template_id_7bd093eb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Comunidades.vue?vue&type=template&id=7bd093eb& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comunidades.vue?vue&type=template&id=7bd093eb&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Comunidades_vue_vue_type_template_id_7bd093eb___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Comunidades_vue_vue_type_template_id_7bd093eb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

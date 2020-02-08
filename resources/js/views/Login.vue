@@ -66,6 +66,40 @@
                 </v-container>
             </v-content>
         </v-app>
+        <v-row justify="center">
+            <v-btn
+                color="primary"
+                dark
+                @click.stop="dialog = true"
+            >
+                Open Dialog
+            </v-btn>
+
+            <v-dialog
+                v-model="dialog"
+                max-width="390"
+            >
+                <v-card>
+                    <v-card-title class="headline">Error en la autenticación</v-card-title>
+
+                    <v-card-text>
+                        Sus credenciales no concuerdan con nuestros registros
+                    </v-card-text>
+
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+
+                        <v-btn
+                            color="green darken-1"
+                            text
+                            @click="dialog = false"
+                        >
+                            Aceptar
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-row>
     </div>
 </template>
 
@@ -74,6 +108,7 @@
         data(){
             return{
                 form: {},
+                dialog: false,
             }
         },
         created () {
@@ -90,7 +125,8 @@
                         this.$router.replace('users');
                     })
                     .catch(err => {
-                        alert(err.response.data.message);
+                        console.log(err.response.data.message);
+                        this.dialog = true;
                     })
             },
 

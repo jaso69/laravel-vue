@@ -63,14 +63,16 @@
             </template>
             <template v-slot:item.action="{ item }">
                 <v-icon
-                    small
+                    dark
                     class="mr-2"
+                    color="cyan"
                     @click="editItem(item)"
                 >
                     mdi-pencil
                 </v-icon>
                 <v-icon
-                    small
+                    dark
+                    color="red"
                     @click="deleteItem(item)"
                 >
                     mdi-delete

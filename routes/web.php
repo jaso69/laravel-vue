@@ -25,6 +25,14 @@ Route::post('/users/update', 'UsersController@update')->name('users.update');
 
 Route::post('/users/destroy', 'UsersController@destroy')->name('users.destroy');
 
+Route::post('/comunidades', 'ComunidadController@store');
+
+Route::get('/comunidades', 'ComunidadController@index');
+
+Route::post('/comunidades/update', 'ComunidadController@update');
+
+Route::post('/comunidades/destroy', 'ComunidadController@destroy');
+
 Route::post('/gasto', 'GastoController@store')->name('gasto.store');
 
 Route::get('/gasto', 'GastoController@index')->name('gasto.index');

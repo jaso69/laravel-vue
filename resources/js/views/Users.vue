@@ -15,6 +15,17 @@
                     </v-list-item-content>
                 </v-list-item>
 
+                <v-list-item v-if="empleado" link @click="componentes('comunidad')">
+                    <v-list-item-action>
+                        <v-icon>mdi-office-building</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>
+                            Comunidades
+                        </v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
                 <v-list-item v-if="empleado" link @click="componentes('gastos')">
                     <v-list-item-action>
                         <v-icon>mdi-currency-eur</v-icon>
@@ -68,6 +79,7 @@
                         <calendar v-if="calendario" />
                         <showork :eventos="eventos" v-if="showork"/>
                         <users-table v-if="admin_user"/>
+                        <comunidades v-if="comunidad"/>
                         <gastosUser v-if="admin_gastos" />
                     </v-col>
                 </v-row>
@@ -97,6 +109,7 @@
             empleado: false,
             calendario: false,
             showork: false,
+            comunidad: false,
             eventos: null,
         }),
         created () {
@@ -152,12 +165,16 @@
                 if (op === 'showork') {
                     this.showork = true;
                 }
+                if (op === 'comunidad') {
+                    this.comunidad = true;
+                }
             },
             limpiar(){
                 this.showork = false;
                 this.calendario = false;
                 this.admin_gastos = false;
                 this.admin_user = false;
+                this.comunidad = false;
             },
         },
     }
