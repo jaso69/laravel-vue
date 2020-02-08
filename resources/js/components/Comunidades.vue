@@ -81,7 +81,7 @@
                             dark
                             class="mr-2"
                             color="success"
-                            @click="editItem(item)"
+                            @click="viviendas(item)"
                         >
                             mdi-door-closed
                         </v-icon>
@@ -128,7 +128,7 @@
             max-width="390"
         >
             <v-card>
-                <v-card-title class="headline">Aviso de borrado de Comunidad</v-card-title>
+                <v-card-title class="headline">Aviso de borrado de datos</v-card-title>
 
                 <v-card-text>
                     Seguro deseas borrar esta Comunidad ??.
@@ -155,6 +155,103 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+       <div>
+           <v-row justify="center">
+               <v-dialog v-model="dialog_viviendas" fullscreen hide-overlay transition="dialog-bottom-transition">
+                   <v-card>
+                       <v-toolbar dark color="primary">
+                           <v-btn icon dark @click="dialog_viviendas = false">
+                               <v-icon>mdi-close</v-icon>
+                           </v-btn>
+                           <v-toolbar-title>Viviendas</v-toolbar-title>
+                           <v-spacer></v-spacer>
+                           <v-toolbar-items>
+                               <v-btn dark text @click="dialog_viviendas = false">Save</v-btn>
+                           </v-toolbar-items>
+                       </v-toolbar>
+                       <v-list subheader>
+                           <v-subheader>Generador de viviendas</v-subheader>
+                           <v-list-item>
+                               <v-list-item-content>
+                                   <v-list-item-title>Introduzca escalera</v-list-item-title>
+                                   <v-col class="d-flex" cols="12" sm="6">
+                                       <v-text-field
+                                           v-model="escalera"
+                                           label="Escalera">
+
+                                       </v-text-field>
+                                   </v-col>
+                               </v-list-item-content>
+
+                                   <v-list-item-content>
+                                       <v-list-item-title>Introduzca tipo de vivienda</v-list-item-title>
+                                       <v-col class="d-flex" cols="12" sm="6">
+                                           <v-select
+                                               :items="tipo_vivienda"
+                                               v-model="tipo"
+                                               label="Tipo de vivienda"
+                                               outlined
+                                           ></v-select>
+                                       </v-col>
+                                   </v-list-item-content>
+
+                                   <v-list-item-content>
+                                       <v-list-item-title>Numero de plantas</v-list-item-title>
+                                       <v-col class="d-flex" cols="12" sm="6">
+                                           <v-select
+                                               :items="plantas"
+                                               v-model="planta"
+                                               label="Numero de plantas"
+                                               outlined
+                                           ></v-select>
+                                       </v-col>
+                                   </v-list-item-content>
+
+                               <v-list-item-content>
+                                   <v-list-item-title>Rango de letras</v-list-item-title>
+                                   <v-col class="d-flex" cols="12" sm="6">
+                                       <v-select
+                                           :items="letras"
+                                           v-model="letra"
+                                           label="Rango de letras"
+                                           outlined
+                                       ></v-select>
+                                   </v-col>
+                               </v-list-item-content>
+                           </v-list-item>
+                           <v-list-item-action>
+                               <v-btn outlined class="mr-4"
+                                      color="lime"
+                                      @click="generador">
+                                   Generar
+                               </v-btn>
+                           </v-list-item-action>
+                       </v-list>
+                       <v-divider></v-divider>
+                       <v-simple-table fixed-header>
+                           <template v-slot:default>
+                               <thead>
+                               <tr>
+                                   <th class="text-left">Tipo</th>
+                                   <th class="text-left">Escalera</th>
+                                   <th class="text-left">Planta</th>
+                                   <th class="text-left">Letra</th>
+                               </tr>
+                               </thead>
+                               <tbody>
+                               <tr v-for="item in viviendass" :key="item.id">
+                                   <td>{{ item.tipo }}</td>
+                                   <td>{{ item.escalera }}</td>
+                                   <td>{{ item.planta }}</td>
+                                   <td>{{ item.letra }}</td>
+                               </tr>
+                               </tbody>
+                           </template>
+                       </v-simple-table>
+                   </v-card>
+               </v-dialog>
+           </v-row>
+       </div>
     </div>
 </template>
 
@@ -162,9 +259,27 @@
     export default {
         data: () => ({
             dialog: false,
+            dialog_viviendas: false,
             search: '',
             eliminar: null,
             dialogo: false,
+            planta: null,
+            tipo: null,
+            letra: null,
+            escalera: null,
+            viviendass: [],
+            tipo_vivienda: ['unipersonal', 'vivienda', 'garaje', 'trastero'],
+            plantas: [
+                1,2,3,4,5,6,7,8,9,10,
+                11,12,13,14,15,16,17,18,19,20,
+                21,22,23,24,25,26,27,28,29,30,
+                31,32,33,34,35,36,37,38,39,40,
+                41,42,43,44,45,46,47,48,49,50,
+                51,52,53,54,55,56,57,58,59,60,
+            ],
+            letras:[
+                'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','W','X','Y','Z',
+            ],
             headers: [
                 {
                     text: 'Calle',
@@ -222,9 +337,38 @@
                     });
             },
 
+            viviendas(item){
+                this.editedItem = Object.assign({}, item);
+                axios.post('/viviendas', {id: this.editedItem.id})
+                    .then(res => {
+                        this.viviendass = res.data;
+                        this.dialog_viviendas = true;
+                    })
+                    .catch(err => {
+                        console.log(err.response.data)
+                    });
+
+            },
+
+            generador(){
+                axios.post('/vivienda', {
+                    id: this.editedItem.id,
+                    escalera: this.escalera,
+                    planta: this.planta,
+                    tipo: this.tipo,
+                    letra: this.letra,
+                })
+                    .then(res => {
+                        this.viviendass = res.data;
+                    })
+                    .catch(err => {
+                        console.log(err.response.data)
+                    });
+            },
+
             editItem (item) {
-                this.editedIndex = this.desserts.indexOf(item)
-                this.editedItem = Object.assign({}, item)
+                this.editedIndex = this.desserts.indexOf(item);
+                this.editedItem = Object.assign({}, item);
                 this.dialog = true
             },
 

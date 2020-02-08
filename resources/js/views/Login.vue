@@ -66,14 +66,6 @@
                 </v-container>
             </v-content>
         </v-app>
-        <v-row justify="center">
-            <v-btn
-                color="primary"
-                dark
-                @click.stop="dialog = true"
-            >
-                Open Dialog
-            </v-btn>
 
             <v-dialog
                 v-model="dialog"
@@ -99,7 +91,6 @@
                     </v-card-actions>
                 </v-card>
             </v-dialog>
-        </v-row>
     </div>
 </template>
 

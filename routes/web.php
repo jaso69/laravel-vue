@@ -33,6 +33,10 @@ Route::post('/comunidades/update', 'ComunidadController@update');
 
 Route::post('/comunidades/destroy', 'ComunidadController@destroy');
 
+Route::post('/viviendas', 'ViviendaController@index');
+
+Route::post('/vivienda', 'ViviendaController@store');
+
 Route::post('/gasto', 'GastoController@store')->name('gasto.store');
 
 Route::get('/gasto', 'GastoController@index')->name('gasto.index');

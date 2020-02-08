@@ -3116,13 +3116,119 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dialog: false,
+      dialog_viviendas: false,
       search: '',
       eliminar: null,
       dialogo: false,
+      planta: null,
+      tipo: null,
+      letra: null,
+      escalera: null,
+      viviendass: [],
+      tipo_vivienda: ['unipersonal', 'vivienda', 'garaje', 'trastero'],
+      plantas: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60],
+      letras: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'W', 'X', 'Y', 'Z'],
       headers: [{
         text: 'Calle',
         align: 'left',
@@ -3185,6 +3291,34 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err.response.data);
       });
     },
+    viviendas: function viviendas(item) {
+      var _this2 = this;
+
+      this.editedItem = Object.assign({}, item);
+      axios.post('/viviendas', {
+        id: this.editedItem.id
+      }).then(function (res) {
+        _this2.viviendass = res.data;
+        _this2.dialog_viviendas = true;
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    },
+    generador: function generador() {
+      var _this3 = this;
+
+      axios.post('/vivienda', {
+        id: this.editedItem.id,
+        escalera: this.escalera,
+        planta: this.planta,
+        tipo: this.tipo,
+        letra: this.letra
+      }).then(function (res) {
+        _this3.viviendass = res.data;
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    },
     editItem: function editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);
@@ -3197,30 +3331,30 @@ __webpack_require__.r(__webpack_exports__);
       this.dialogo = true;
     },
     borrar: function borrar() {
-      var _this2 = this;
+      var _this4 = this;
 
       axios.post('/comunidades/destroy', {
         id: this.eliminar.id
       }).then(function (res) {
-        _this2.initialize();
+        _this4.initialize();
 
-        _this2.eliminar = null;
-        _this2.dialogo = false;
+        _this4.eliminar = null;
+        _this4.dialogo = false;
       })["catch"](function (err) {
         console.log(err.response.data);
       });
     },
     close: function close() {
-      var _this3 = this;
+      var _this5 = this;
 
       this.dialog = false;
       setTimeout(function () {
-        _this3.editedItem = Object.assign({}, _this3.defaultItem);
-        _this3.editedIndex = -1;
+        _this5.editedItem = Object.assign({}, _this5.defaultItem);
+        _this5.editedIndex = -1;
       }, 300);
     },
     save: function save() {
-      var _this4 = this;
+      var _this6 = this;
 
       if (this.editedIndex > -1) {
         axios.post('/comunidades/update', {
@@ -3231,7 +3365,7 @@ __webpack_require__.r(__webpack_exports__);
           provincia: this.editedItem.provincia,
           codigo_postal: this.editedItem.codigo_postal
         }).then(function (res) {
-          _this4.initialize();
+          _this6.initialize();
         })["catch"](function (err) {
           console.log(err.response.data);
         }); //Object.assign(this.desserts[this.editedIndex], this.editedItem)
@@ -3244,7 +3378,7 @@ __webpack_require__.r(__webpack_exports__);
           provincia: this.editedItem.provincia,
           codigo_postal: this.editedItem.codigo_postal
         }).then(function (res) {
-          _this4.initialize();
+          _this6.initialize();
         })["catch"](function (err) {
           console.log(err.response.data);
         });
@@ -4185,15 +4319,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -42247,7 +42372,7 @@ var render = function() {
                                     attrs: { dark: "", color: "success" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.editItem(item)
+                                        return _vm.viviendas(item)
                                       }
                                     }
                                   },
@@ -42403,7 +42528,7 @@ var render = function() {
             "v-card",
             [
               _c("v-card-title", { staticClass: "headline" }, [
-                _vm._v("Aviso de borrado de Comunidad")
+                _vm._v("Aviso de borrado de datos")
               ]),
               _vm._v(" "),
               _c("v-card-text", [
@@ -42437,6 +42562,311 @@ var render = function() {
                       on: { click: _vm.borrar }
                     },
                     [_vm._v("\n                    Borrar\n                ")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _c(
+            "v-row",
+            { attrs: { justify: "center" } },
+            [
+              _c(
+                "v-dialog",
+                {
+                  attrs: {
+                    fullscreen: "",
+                    "hide-overlay": "",
+                    transition: "dialog-bottom-transition"
+                  },
+                  model: {
+                    value: _vm.dialog_viviendas,
+                    callback: function($$v) {
+                      _vm.dialog_viviendas = $$v
+                    },
+                    expression: "dialog_viviendas"
+                  }
+                },
+                [
+                  _c(
+                    "v-card",
+                    [
+                      _c(
+                        "v-toolbar",
+                        { attrs: { dark: "", color: "primary" } },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { icon: "", dark: "" },
+                              on: {
+                                click: function($event) {
+                                  _vm.dialog_viviendas = false
+                                }
+                              }
+                            },
+                            [_c("v-icon", [_vm._v("mdi-close")])],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-toolbar-title", [_vm._v("Viviendas")]),
+                          _vm._v(" "),
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-toolbar-items",
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { dark: "", text: "" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.dialog_viviendas = false
+                                    }
+                                  }
+                                },
+                                [_vm._v("Save")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-list",
+                        { attrs: { subheader: "" } },
+                        [
+                          _c("v-subheader", [_vm._v("Generador de viviendas")]),
+                          _vm._v(" "),
+                          _c(
+                            "v-list-item",
+                            [
+                              _c(
+                                "v-list-item-content",
+                                [
+                                  _c("v-list-item-title", [
+                                    _vm._v("Introduzca escalera")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    {
+                                      staticClass: "d-flex",
+                                      attrs: { cols: "12", sm: "6" }
+                                    },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: { label: "Escalera" },
+                                        model: {
+                                          value: _vm.escalera,
+                                          callback: function($$v) {
+                                            _vm.escalera = $$v
+                                          },
+                                          expression: "escalera"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-item-content",
+                                [
+                                  _c("v-list-item-title", [
+                                    _vm._v("Introduzca tipo de vivienda")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    {
+                                      staticClass: "d-flex",
+                                      attrs: { cols: "12", sm: "6" }
+                                    },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          items: _vm.tipo_vivienda,
+                                          label: "Tipo de vivienda",
+                                          outlined: ""
+                                        },
+                                        model: {
+                                          value: _vm.tipo,
+                                          callback: function($$v) {
+                                            _vm.tipo = $$v
+                                          },
+                                          expression: "tipo"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-item-content",
+                                [
+                                  _c("v-list-item-title", [
+                                    _vm._v("Numero de plantas")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    {
+                                      staticClass: "d-flex",
+                                      attrs: { cols: "12", sm: "6" }
+                                    },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          items: _vm.plantas,
+                                          label: "Numero de plantas",
+                                          outlined: ""
+                                        },
+                                        model: {
+                                          value: _vm.planta,
+                                          callback: function($$v) {
+                                            _vm.planta = $$v
+                                          },
+                                          expression: "planta"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-list-item-content",
+                                [
+                                  _c("v-list-item-title", [
+                                    _vm._v("Rango de letras")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    {
+                                      staticClass: "d-flex",
+                                      attrs: { cols: "12", sm: "6" }
+                                    },
+                                    [
+                                      _c("v-select", {
+                                        attrs: {
+                                          items: _vm.letras,
+                                          label: "Rango de letras",
+                                          outlined: ""
+                                        },
+                                        model: {
+                                          value: _vm.letra,
+                                          callback: function($$v) {
+                                            _vm.letra = $$v
+                                          },
+                                          expression: "letra"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-list-item-action",
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: "mr-4",
+                                  attrs: { outlined: "", color: "lime" },
+                                  on: { click: _vm.generador }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                               Generar\n                           "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-divider"),
+                      _vm._v(" "),
+                      _c("v-simple-table", {
+                        attrs: { "fixed-header": "" },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "default",
+                            fn: function() {
+                              return [
+                                _c("thead", [
+                                  _c("tr", [
+                                    _c("th", { staticClass: "text-left" }, [
+                                      _vm._v("Tipo")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("th", { staticClass: "text-left" }, [
+                                      _vm._v("Escalera")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("th", { staticClass: "text-left" }, [
+                                      _vm._v("Planta")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("th", { staticClass: "text-left" }, [
+                                      _vm._v("Letra")
+                                    ])
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "tbody",
+                                  _vm._l(_vm.viviendass, function(item) {
+                                    return _c("tr", { key: item.id }, [
+                                      _c("td", [_vm._v(_vm._s(item.tipo))]),
+                                      _vm._v(" "),
+                                      _c("td", [_vm._v(_vm._s(item.escalera))]),
+                                      _vm._v(" "),
+                                      _c("td", [_vm._v(_vm._s(item.planta))]),
+                                      _vm._v(" "),
+                                      _c("td", [_vm._v(_vm._s(item.letra))])
+                                    ])
+                                  }),
+                                  0
+                                )
+                              ]
+                            },
+                            proxy: true
+                          }
+                        ])
+                      })
+                    ],
+                    1
                   )
                 ],
                 1
@@ -43919,72 +44349,51 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "v-row",
-        { attrs: { justify: "center" } },
+        "v-dialog",
+        {
+          attrs: { "max-width": "390" },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
         [
           _c(
-            "v-btn",
-            {
-              attrs: { color: "primary", dark: "" },
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  _vm.dialog = true
-                }
-              }
-            },
-            [_vm._v("\n            Open Dialog\n        ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "v-dialog",
-            {
-              attrs: { "max-width": "390" },
-              model: {
-                value: _vm.dialog,
-                callback: function($$v) {
-                  _vm.dialog = $$v
-                },
-                expression: "dialog"
-              }
-            },
+            "v-card",
             [
+              _c("v-card-title", { staticClass: "headline" }, [
+                _vm._v("Error en la autenticación")
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "\n                    Sus credenciales no concuerdan con nuestros registros\n                "
+                )
+              ]),
+              _vm._v(" "),
               _c(
-                "v-card",
+                "v-card-actions",
                 [
-                  _c("v-card-title", { staticClass: "headline" }, [
-                    _vm._v("Error en la autenticación")
-                  ]),
-                  _vm._v(" "),
-                  _c("v-card-text", [
-                    _vm._v(
-                      "\n                    Sus credenciales no concuerdan con nuestros registros\n                "
-                    )
-                  ]),
+                  _c("v-spacer"),
                   _vm._v(" "),
                   _c(
-                    "v-card-actions",
+                    "v-btn",
+                    {
+                      attrs: { color: "green darken-1", text: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialog = false
+                        }
+                      }
+                    },
                     [
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "green darken-1", text: "" },
-                          on: {
-                            click: function($event) {
-                              _vm.dialog = false
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        Aceptar\n                    "
-                          )
-                        ]
+                      _vm._v(
+                        "\n                        Aceptar\n                    "
                       )
-                    ],
-                    1
+                    ]
                   )
                 ],
                 1
