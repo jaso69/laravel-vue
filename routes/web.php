@@ -15,28 +15,34 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/notas', 'AgendaController@store')->name('agenda.store');
+Route::Auth();
 
-Route::post('/notas/update', 'AgendaController@update')->name('agenda.update');
+Route::post('/notas', 'AgendaController@store')->middleware('auth:api');
 
-Route::post('/notas/destroy', 'AgendaController@destroy')->name('agenda.destroy');
+Route::post('/notas/update', 'AgendaController@update')->middleware('auth:api');
 
-Route::post('/users/update', 'UsersController@update')->name('users.update');
+Route::post('/notas/destroy', 'AgendaController@destroy')->middleware('auth:api');
 
-Route::post('/users/destroy', 'UsersController@destroy')->name('users.destroy');
+Route::post('/users/update', 'UsersController@update')->middleware('auth:api');
 
-Route::post('/comunidades', 'ComunidadController@store');
+Route::post('/users/destroy', 'UsersController@destroy')->middleware('auth:api');
 
-Route::get('/comunidades', 'ComunidadController@index');
+Route::post('/comunidades', 'ComunidadController@store')->middleware('auth:api');
 
-Route::post('/comunidades/update', 'ComunidadController@update');
+Route::get('/comunidades', 'ComunidadController@index')->middleware('auth:api');
 
-Route::post('/comunidades/destroy', 'ComunidadController@destroy');
+Route::post('/comunidades/update', 'ComunidadController@update')->middleware('auth:api');
 
-Route::post('/viviendas', 'ViviendaController@index');
+Route::post('/comunidades/destroy', 'ComunidadController@destroy')->middleware('auth:api');
 
-Route::post('/vivienda', 'ViviendaController@store');
+Route::post('/viviendas', 'ViviendaController@index')->middleware('auth:api');
 
-Route::post('/gasto', 'GastoController@store')->name('gasto.store');
+Route::post('/vivienda', 'ViviendaController@store')->middleware('auth:api');
 
-Route::get('/gasto', 'GastoController@index')->name('gasto.index');
+Route::post('/vivienda/update', 'ViviendaController@update')->middleware('auth:api');
+
+Route::post('/vivienda/destroy', 'ViviendaController@destroy')->middleware('auth:api');
+
+Route::post('/gasto', 'GastoController@store')->middleware('auth:api');
+
+Route::get('/gasto', 'GastoController@index')->middleware('auth:api');

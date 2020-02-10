@@ -25,7 +25,29 @@ class GeneradorViviendas
         $this->letra = $letra;
         $this->escalera = $escalera;
         $this->id = $id;
-        $this->generador();
+        $this->seleccion();
+    }
+
+    protected function seleccion(){
+        if ($this->tipo === 'vivienda'){ $this->generador(); }
+        if ($this->tipo === 'unipersonal' ||
+            $this->tipo === 'garaje' ||
+            $this->tipo === 'trastero')
+                { $this->generador_plazas();}
+    }
+
+    protected function generador_plazas(){
+        for ($p = 1; $p <= $this->planta; $p++) {
+            $this->grabar_plazas($p);
+        }
+    }
+
+    protected function grabar_plazas($p){
+        Vivienda::create([
+            'comunidad_id' => $this->id,
+            'tipo' => $this->tipo,
+            'planta' => (string) $p,
+        ]);
     }
 
     protected function grabar($p, $l){

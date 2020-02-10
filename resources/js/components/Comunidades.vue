@@ -123,6 +123,7 @@
                 <v-btn color="primary" @click="initialize">Recargar</v-btn>
             </template>
         </v-data-table>
+
         <v-dialog
             v-model="dialogo"
             max-width="390"
@@ -155,33 +156,57 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+
+        <v-dialog
+            v-model="dialogoVivienda"
+            max-width="390"
+        >
+            <v-card>
+                <v-card-title class="headline">Aviso de borrado de datos</v-card-title>
+
+                <v-card-text>
+                    Seguro deseas borrar esta Vivienda ??.
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn
+                        color="green darken-1"
+                        text
+                        @click="dialogoVivienda = false"
+                    >
+                        Cancelar
+                    </v-btn>
+
+                    <v-btn
+                        color="red"
+                        text
+                        @click="borradoVivienda"
+                    >
+                        Borrar
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
        <div>
            <v-row justify="center">
                <v-dialog v-model="dialog_viviendas" fullscreen hide-overlay transition="dialog-bottom-transition">
                    <v-card>
                        <v-toolbar dark color="primary">
-                           <v-btn icon dark @click="dialog_viviendas = false">
-                               <v-icon>mdi-close</v-icon>
-                           </v-btn>
                            <v-toolbar-title>Viviendas</v-toolbar-title>
                            <v-spacer></v-spacer>
                            <v-toolbar-items>
-                               <v-btn dark text @click="dialog_viviendas = false">Save</v-btn>
+                               <v-btn dark text @click="dialog_viviendas = false">
+                                   <v-icon>mdi-close</v-icon>
+                                   Cerrar
+                               </v-btn>
                            </v-toolbar-items>
                        </v-toolbar>
                        <v-list subheader>
                            <v-subheader>Generador de viviendas</v-subheader>
                            <v-list-item>
-                               <v-list-item-content>
-                                   <v-list-item-title>Introduzca escalera</v-list-item-title>
-                                   <v-col class="d-flex" cols="12" sm="6">
-                                       <v-text-field
-                                           v-model="escalera"
-                                           label="Escalera">
-
-                                       </v-text-field>
-                                   </v-col>
-                               </v-list-item-content>
 
                                    <v-list-item-content>
                                        <v-list-item-title>Introduzca tipo de vivienda</v-list-item-title>
@@ -195,7 +220,53 @@
                                        </v-col>
                                    </v-list-item-content>
 
-                                   <v-list-item-content>
+                               <v-list-item-content v-if="tipo === 'unipersonal'">
+                                   <v-list-item-title>Numero de plazas</v-list-item-title>
+                                   <v-col class="d-flex" cols="12" sm="6">
+                                       <v-select
+                                           :items="plantas"
+                                           v-model="planta"
+                                           label="Numero de viviendas"
+                                           outlined
+                                       ></v-select>
+                                   </v-col>
+                               </v-list-item-content>
+
+                               <v-list-item-content v-if="tipo === 'garaje'">
+                                   <v-list-item-title>Numero de plazas</v-list-item-title>
+                                   <v-col class="d-flex" cols="12" sm="6">
+                                       <v-select
+                                           :items="plantas"
+                                           v-model="planta"
+                                           label="Numero de plazas"
+                                           outlined
+                                       ></v-select>
+                                   </v-col>
+                               </v-list-item-content>
+
+                               <v-list-item-content v-if="tipo === 'trastero'">
+                                   <v-list-item-title>Numero de trasteros</v-list-item-title>
+                                   <v-col class="d-flex" cols="12" sm="6">
+                                       <v-select
+                                           :items="plantas"
+                                           v-model="planta"
+                                           label="Numero de trasteros"
+                                           outlined
+                                       ></v-select>
+                                   </v-col>
+                               </v-list-item-content>
+
+                               <v-list-item-content v-if="tipo === 'vivienda'">
+                                   <v-list-item-title>Introduzca escalera</v-list-item-title>
+                                   <v-col class="d-flex" cols="12" sm="6">
+                                       <v-text-field
+                                           v-model="escalera"
+                                           label="Escalera">
+                                       </v-text-field>
+                                   </v-col>
+                               </v-list-item-content>
+
+                                   <v-list-item-content v-if="tipo === 'vivienda'">
                                        <v-list-item-title>Numero de plantas</v-list-item-title>
                                        <v-col class="d-flex" cols="12" sm="6">
                                            <v-select
@@ -207,7 +278,7 @@
                                        </v-col>
                                    </v-list-item-content>
 
-                               <v-list-item-content>
+                               <v-list-item-content v-if="tipo === 'vivienda'">
                                    <v-list-item-title>Rango de letras</v-list-item-title>
                                    <v-col class="d-flex" cols="12" sm="6">
                                        <v-select
@@ -228,26 +299,114 @@
                            </v-list-item-action>
                        </v-list>
                        <v-divider></v-divider>
-                       <v-simple-table fixed-header>
-                           <template v-slot:default>
-                               <thead>
-                               <tr>
-                                   <th class="text-left">Tipo</th>
-                                   <th class="text-left">Escalera</th>
-                                   <th class="text-left">Planta</th>
-                                   <th class="text-left">Letra</th>
-                               </tr>
-                               </thead>
-                               <tbody>
-                               <tr v-for="item in viviendass" :key="item.id">
-                                   <td>{{ item.tipo }}</td>
-                                   <td>{{ item.escalera }}</td>
-                                   <td>{{ item.planta }}</td>
-                                   <td>{{ item.letra }}</td>
-                               </tr>
-                               </tbody>
-                           </template>
-                       </v-simple-table>
+                       <div v-if="viviendas.length > 0">
+                           <v-simple-table fixed-header>
+                               <template v-slot:default>
+                                   <thead>
+                                   <tr>
+                                       <th class="text-left">Tipo</th>
+                                       <th class="text-left">Escalera</th>
+                                       <th class="text-left">Planta</th>
+                                       <th class="text-left">Letra</th>
+                                       <th class="text-left">Acciones</th>
+                                   </tr>
+                                   </thead>
+                                   <tbody>
+                                   <tr v-for="item in viviendass"
+                                       :key="item.id"
+                                   >
+                                       <td>
+                                           <v-text-field
+                                               outlined
+                                               :disabled = "disabled[item.id]"
+                                               v-model="item.tipo">
+                                           </v-text-field>
+                                       </td>
+                                       <td>
+                                           <v-text-field
+                                               :disabled = "disabled[item.id]"
+                                               outlined
+                                               v-model="item.escalera">
+                                           </v-text-field>
+                                       </td>
+                                       <td>
+                                           <v-text-field
+                                               :disabled = "disabled[item.id]"
+                                               outlined
+                                               v-model="item.planta">
+                                           </v-text-field>
+                                       </td>
+                                       <td>
+                                           <v-text-field
+                                               :disabled = "disabled[item.id]"
+                                               outlined
+                                               v-model="item.letra">
+                                           </v-text-field>
+                                       </td>
+                                       <td>
+                                           <v-tooltip top v-if="disabled[item.id]">
+                                               <template v-slot:activator="{ on }">
+                                                   <v-icon
+                                                       v-on="on"
+                                                       dark
+                                                       class="mr-2"
+                                                       color="cyan"
+                                                       @click="editViviendas(item)"
+                                                   >
+                                                       mdi-pencil
+                                                   </v-icon>
+                                               </template>
+                                               <span class="cyan p-2">Editar</span>
+                                           </v-tooltip>
+                                           <v-tooltip top v-if="!disabled[item.id]">
+                                               <template v-slot:activator="{ on }">
+                                                   <v-icon
+                                                       v-on="on"
+                                                       dark
+                                                       class="mr-2"
+                                                       color="cyan"
+                                                       @click="saveViviendas"
+                                                   >
+                                                       mdi-content-save-edit-outline
+                                                   </v-icon>
+                                               </template>
+                                               <span class="cyan p-2">Guardar</span>
+                                           </v-tooltip>
+                                           <v-tooltip top v-if="!disabled[item.id]">
+                                               <template v-slot:activator="{ on }">
+                                                   <v-icon
+                                                       v-on="on"
+                                                       dark
+                                                       class="mr-2"
+                                                       color="cyan"
+                                                       @click="cancelViviendas"
+                                                   >
+                                                       mdi-cancel
+                                                   </v-icon>
+                                               </template>
+                                               <span class="cyan p-2">Cancelar</span>
+                                           </v-tooltip>
+                                           <v-tooltip top>
+                                               <template v-slot:activator="{ on }">
+                                                   <v-icon
+                                                       v-on="on"
+                                                       dark
+                                                       class="mr-2"
+                                                       color="red"
+                                                       @click="borrarVivienda(item)"
+                                                   >
+                                                       mdi-delete
+                                                   </v-icon>
+                                               </template>
+                                               <span class="red p-2">Borrar</span>
+                                           </v-tooltip>
+                                       </td>
+                                   </tr>
+                                   </tbody>
+                               </template>
+                           </v-simple-table>
+                       </div>
+
                    </v-card>
                </v-dialog>
            </v-row>
@@ -260,14 +419,23 @@
         data: () => ({
             dialog: false,
             dialog_viviendas: false,
+            editing_viviendas: false,
             search: '',
+            disabled: [],
             eliminar: null,
             dialogo: false,
+            dialogoVivienda: false,
             planta: null,
             tipo: null,
             letra: null,
             escalera: null,
-            viviendass: [],
+            viviendass: {
+                tipo: '',
+                escalera: '',
+                planta: '',
+                letra: '',
+            },
+            editedVivienda: [],
             tipo_vivienda: ['unipersonal', 'vivienda', 'garaje', 'trastero'],
             plantas: [
                 1,2,3,4,5,6,7,8,9,10,
@@ -276,6 +444,10 @@
                 31,32,33,34,35,36,37,38,39,40,
                 41,42,43,44,45,46,47,48,49,50,
                 51,52,53,54,55,56,57,58,59,60,
+                61,62,63,64,65,66,67,68,69,70,
+                71,72,73,74,75,76,77,78,79,80,
+                81,82,83,84,85,86,87,88,89,90,
+                91,92,93,94,95,96,97,98,99,100,
             ],
             letras:[
                 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','W','X','Y','Z',
@@ -338,10 +510,17 @@
             },
 
             viviendas(item){
+                let cont;
                 this.editedItem = Object.assign({}, item);
+                this.viviendass = null;
                 axios.post('/viviendas', {id: this.editedItem.id})
                     .then(res => {
-                        this.viviendass = res.data;
+                        if(res.data.length > 0) {
+                            this.viviendass = res.data;
+                            for (cont = 0; cont <= this.viviendass.length * 4; cont++) {
+                                this.disabled[cont] = true;
+                            }
+                        }
                         this.dialog_viviendas = true;
                     })
                     .catch(err => {
@@ -359,6 +538,60 @@
                     letra: this.letra,
                 })
                     .then(res => {
+                        this.viviendass = res.data;
+                    })
+                    .catch(err => {
+                        console.log(err.response.data)
+                    });
+            },
+
+            editViviendas(item){
+                if(!this.editing_viviendas){
+                this.editedVivienda = item;
+                this.editing_viviendas = true;
+                this.disabled.splice(item.id,1,false);}
+            },
+
+            cancelViviendas(){
+                this.disabled.splice(this.editedVivienda.id,1,true);
+                this.editedVivienda = null;
+                this.editing_viviendas = false;
+            },
+
+            saveViviendas(){
+                axios.post('/vivienda/update/', {
+                    id: this.editedVivienda.id,
+                    comunidad_id: this.editedVivienda.comunidad_id,
+                    escalera: this.editedVivienda.escalera,
+                    planta: this.editedVivienda.planta,
+                    tipo: this.editedVivienda.tipo,
+                    letra: this.editedVivienda.letra,
+                })
+                    .then(res => {
+                        this.disabled.splice(this.editedVivienda.id,1,true);
+                        this.editedVivienda = null;
+                        this.editing_viviendas = false;
+                        this.viviendass = res.data;
+                    })
+                    .catch(err => {
+                        console.log(err.response.data)
+                    });
+            },
+
+            borrarVivienda(item){
+                this.editedVivienda = item;
+                this.dialogoVivienda = true;
+            },
+
+            borradoVivienda(){
+                axios.post('/vivienda/destroy', {
+                    id: this.editedVivienda.id,
+                    comunidad_id: this.editedVivienda.comunidad_id,
+                })
+                    .then(res => {
+                        this.eliminar = null;
+                        this.dialogoVivienda = false;
+                        this.editedVivienda = null;
                         this.viviendass = res.data;
                     })
                     .catch(err => {

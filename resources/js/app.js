@@ -30,6 +30,7 @@ Vue.component('register', require('./components/Form_reg').default);
 Vue.component('showork', require('./components/ShowWork').default);
 Vue.component('usersTable', require('./components/UsersTable').default);
 Vue.component('comunidades', require('./components/Comunidades').default);
+Vue.component('propietarios', require('./components/Propietarios').default);
 Vue.component('gastosUser', require('./components/GastosUser').default);
 Vue.component('alquiler_menu', require('./components/Alquiler_menu').default);
 Vue.component('alquiler_sonido', require('./components/Alquiler_sonido').default);

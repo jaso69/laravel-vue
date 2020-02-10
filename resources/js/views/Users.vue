@@ -26,6 +26,17 @@
                     </v-list-item-content>
                 </v-list-item>
 
+                <v-list-item v-if="empleado" link @click="componentes('propietarios')">
+                    <v-list-item-action>
+                        <v-icon>mdi-account-key</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>
+                            Propietarios
+                        </v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+
                 <v-list-item v-if="empleado" link @click="componentes('gastos')">
                     <v-list-item-action>
                         <v-icon>mdi-currency-eur</v-icon>
@@ -81,6 +92,7 @@
                         <users-table v-if="admin_user"/>
                         <comunidades v-if="comunidad"/>
                         <gastosUser v-if="admin_gastos" />
+                        <propietarios v-if="propietarios" />
                     </v-col>
                 </v-row>
             </v-container>
@@ -110,6 +122,7 @@
             calendario: false,
             showork: false,
             comunidad: false,
+            propietarios: false,
             eventos: null,
         }),
         created () {
@@ -168,6 +181,9 @@
                 if (op === 'comunidad') {
                     this.comunidad = true;
                 }
+                if (op === 'propietarios') {
+                    this.propietarios = true;
+                }
             },
             limpiar(){
                 this.showork = false;
@@ -175,6 +191,7 @@
                 this.admin_gastos = false;
                 this.admin_user = false;
                 this.comunidad = false;
+                this.propietarios = false;
             },
         },
     }
