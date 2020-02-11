@@ -3484,6 +3484,7 @@ __webpack_require__.r(__webpack_exports__);
     generador: function generador() {
       var _this3 = this;
 
+      var cont;
       axios.post('/vivienda', {
         id: this.editedItem.id,
         escalera: this.escalera,
@@ -3491,7 +3492,13 @@ __webpack_require__.r(__webpack_exports__);
         tipo: this.tipo,
         letra: this.letra
       }).then(function (res) {
-        _this3.viviendass = res.data;
+        if (res.data.length > 0) {
+          _this3.viviendass = res.data;
+
+          for (cont = 0; cont <= _this3.viviendass.length * 4; cont++) {
+            _this3.disabled[cont] = true;
+          }
+        }
       })["catch"](function (err) {
         console.log(err.response.data);
       });
@@ -4301,11 +4308,138 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       search: '',
-      title: 'Comunidades',
+      title: 'Selecciona comunidad',
       item_comunidad: null,
       item_vivienda: null,
       data_vivienda: false,
@@ -4372,6 +4506,37 @@ __webpack_require__.r(__webpack_exports__);
         _this2.desserts = res.data;
         _this2.data_vivienda = true;
         _this2.title = _this2.item_comunidad.municipio + ' ' + _this2.item_comunidad.calle + ',' + _this2.item_comunidad.numero;
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    },
+    data_comunidades: function data_comunidades() {
+      var _this3 = this;
+
+      axios.get('/comunidades').then(function (res) {
+        _this3.headers = [{
+          text: 'Calle',
+          align: 'left',
+          value: 'calle'
+        }, {
+          text: 'Numero',
+          value: 'numero'
+        }, {
+          text: 'Municipio',
+          value: 'municipio'
+        }, {
+          text: 'Provincia',
+          value: 'provincia'
+        }, {
+          text: 'Codigo postal',
+          value: 'codigo_postal'
+        }, {
+          text: 'Actions',
+          value: 'action',
+          sortable: false
+        }], _this3.desserts = res.data;
+        _this3.data_vivienda = false;
+        _this3.title = 'Selecciona comunidad';
       })["catch"](function (err) {
         console.log(err.response.data);
       });
@@ -44670,6 +44835,18 @@ var render = function() {
             key: "top",
             fn: function() {
               return [
+                _vm.data_vivienda
+                  ? _c(
+                      "v-btn",
+                      {
+                        staticClass: "ma-2",
+                        attrs: { outlined: "", color: "red" },
+                        on: { click: _vm.data_comunidades }
+                      },
+                      [_vm._v("\n                <- Regresar\n            ")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("v-toolbar-title", { staticClass: "text-center py-2" }, [
                   _c("h4", [_vm._v(_vm._s(_vm.title))])
                 ]),
@@ -44831,199 +45008,381 @@ var render = function() {
         ])
       }),
       _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c(
-            "v-row",
-            { attrs: { justify: "center" } },
+      _vm.dialog
+        ? _c(
+            "div",
             [
               _c(
-                "v-dialog",
-                {
-                  attrs: {
-                    fullscreen: "",
-                    "hide-overlay": "",
-                    transition: "dialog-bottom-transition"
-                  },
-                  model: {
-                    value: _vm.dialog,
-                    callback: function($$v) {
-                      _vm.dialog = $$v
-                    },
-                    expression: "dialog"
-                  }
-                },
+                "v-row",
+                { attrs: { justify: "center" } },
                 [
                   _c(
-                    "v-card",
+                    "v-dialog",
+                    {
+                      attrs: {
+                        fullscreen: "",
+                        "hide-overlay": "",
+                        transition: "dialog-bottom-transition"
+                      },
+                      model: {
+                        value: _vm.dialog,
+                        callback: function($$v) {
+                          _vm.dialog = $$v
+                        },
+                        expression: "dialog"
+                      }
+                    },
                     [
                       _c(
-                        "v-toolbar",
-                        { attrs: { dark: "", color: "primary" } },
+                        "v-card",
+                        { attrs: { outlined: "" } },
                         [
                           _c(
-                            "v-btn",
-                            {
-                              attrs: { icon: "", dark: "" },
-                              on: {
-                                click: function($event) {
-                                  _vm.dialog = false
-                                }
-                              }
-                            },
-                            [_c("v-icon", [_vm._v("mdi-close")])],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-toolbar-title", [_vm._v("Settings")]),
-                          _vm._v(" "),
-                          _c("v-spacer"),
-                          _vm._v(" "),
-                          _c(
-                            "v-toolbar-items",
+                            "v-toolbar",
+                            { attrs: { dark: "", color: "primary" } },
                             [
                               _c(
                                 "v-btn",
                                 {
-                                  attrs: { dark: "", text: "" },
+                                  attrs: { icon: "", dark: "" },
                                   on: {
                                     click: function($event) {
                                       _vm.dialog = false
                                     }
                                   }
                                 },
-                                [_vm._v("Save")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-list",
-                        { attrs: { "three-line": "", subheader: "" } },
-                        [
-                          _c("v-subheader", [_vm._v("User Controls")]),
-                          _vm._v(" "),
-                          _c(
-                            "v-list-item",
-                            [
-                              _c(
-                                "v-list-item-content",
-                                [
-                                  _c("v-list-item-title", [
-                                    _vm._v("Content filtering")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("v-list-item-subtitle", [
-                                    _vm._v(
-                                      "Set the content filtering level to restrict apps that can be downloaded"
-                                    )
-                                  ])
-                                ],
+                                [_c("v-icon", [_vm._v("mdi-close")])],
                                 1
-                              )
+                              ),
+                              _vm._v(" "),
+                              _c("v-toolbar-title", [
+                                _vm._v(
+                                  "Vivienda\n                            " +
+                                    _vm._s(_vm.item_vivienda.planta) +
+                                    "\n                            " +
+                                    _vm._s(_vm.item_vivienda.letra) +
+                                    "\n                        "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("v-spacer")
                             ],
                             1
                           ),
                           _vm._v(" "),
                           _c(
-                            "v-list-item",
+                            "v-container",
                             [
                               _c(
-                                "v-list-item-content",
+                                "v-card-title",
                                 [
-                                  _c("v-list-item-title", [_vm._v("Password")]),
-                                  _vm._v(" "),
-                                  _c("v-list-item-subtitle", [
-                                    _vm._v(
-                                      "Require password for purchase or use password to restrict purchase"
-                                    )
-                                  ])
+                                  _c(
+                                    "v-row",
+                                    [
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "12", md: "4" } },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              rules: _vm.nameRules,
+                                              counter: 10,
+                                              label: "Nombre",
+                                              required: ""
+                                            },
+                                            model: {
+                                              value: _vm.nombre,
+                                              callback: function($$v) {
+                                                _vm.nombre = $$v
+                                              },
+                                              expression: "nombre"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "12", md: "4" } },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              rules: _vm.nameRules,
+                                              counter: 10,
+                                              label: "Primer Apellido",
+                                              required: ""
+                                            },
+                                            model: {
+                                              value: _vm.Apellido1,
+                                              callback: function($$v) {
+                                                _vm.Apellido1 = $$v
+                                              },
+                                              expression: "Apellido1"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "12", md: "4" } },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              rules: _vm.namelRules,
+                                              label: "Segundo Apellido",
+                                              required: ""
+                                            },
+                                            model: {
+                                              value: _vm.apellido2,
+                                              callback: function($$v) {
+                                                _vm.apellido2 = $$v
+                                              },
+                                              expression: "apellido2"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("v-divider"),
-                      _vm._v(" "),
-                      _c(
-                        "v-list",
-                        { attrs: { "three-line": "", subheader: "" } },
-                        [
-                          _c("v-subheader", [_vm._v("General")]),
-                          _vm._v(" "),
-                          _c(
-                            "v-list-item",
-                            [
-                              _c("v-list-item-action", [_c("v-checkbox")], 1),
+                              ),
                               _vm._v(" "),
                               _c(
-                                "v-list-item-content",
+                                "v-card-subtitle",
                                 [
-                                  _c("v-list-item-title", [
-                                    _vm._v("Notifications")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("v-list-item-subtitle", [
-                                    _vm._v(
-                                      "Notify me about updates to apps or games that I downloaded"
-                                    )
-                                  ])
+                                  _c(
+                                    "v-row",
+                                    [
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "12", md: "4" } },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              rules: _vm.nameRules,
+                                              counter: 10,
+                                              label: "DNI",
+                                              required: ""
+                                            },
+                                            model: {
+                                              value: _vm.dni,
+                                              callback: function($$v) {
+                                                _vm.dni = $$v
+                                              },
+                                              expression: "dni"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "12", md: "4" } },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              rules: _vm.nameRules,
+                                              counter: 10,
+                                              label: "Telefono",
+                                              required: ""
+                                            },
+                                            model: {
+                                              value: _vm.telefono,
+                                              callback: function($$v) {
+                                                _vm.telefono = $$v
+                                              },
+                                              expression: "telefono"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "12", md: "4" } },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              rules: _vm.emailRules,
+                                              label: "Movil",
+                                              required: ""
+                                            },
+                                            model: {
+                                              value: _vm.movil,
+                                              callback: function($$v) {
+                                                _vm.movil = $$v
+                                              },
+                                              expression: "movil"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-list-item",
-                            [
-                              _c("v-list-item-action", [_c("v-checkbox")], 1),
+                              ),
                               _vm._v(" "),
                               _c(
-                                "v-list-item-content",
+                                "v-card-text",
                                 [
-                                  _c("v-list-item-title", [_vm._v("Sound")]),
-                                  _vm._v(" "),
-                                  _c("v-list-item-subtitle", [
-                                    _vm._v(
-                                      "Auto-update apps at any time. Data charges may apply"
-                                    )
-                                  ])
+                                  _c(
+                                    "v-row",
+                                    [
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "12", md: "4" } },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              rules: _vm.emailRules,
+                                              counter: 10,
+                                              label: "Email",
+                                              required: ""
+                                            },
+                                            model: {
+                                              value: _vm.email,
+                                              callback: function($$v) {
+                                                _vm.email = $$v
+                                              },
+                                              expression: "email"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "12", md: "4" } },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              rules: _vm.nameRules,
+                                              counter: 10,
+                                              label: "Titulo",
+                                              required: ""
+                                            },
+                                            model: {
+                                              value: _vm.titulo,
+                                              callback: function($$v) {
+                                                _vm.titulo = $$v
+                                              },
+                                              expression: "titulo"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "12", md: "4" } },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              rules: _vm.emailRules,
+                                              label: "Cargo",
+                                              required: ""
+                                            },
+                                            model: {
+                                              value: _vm.cargo,
+                                              callback: function($$v) {
+                                                _vm.cargo = $$v
+                                              },
+                                              expression: "cargo"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-list-item",
-                            [
-                              _c("v-list-item-action", [_c("v-checkbox")], 1),
+                              ),
                               _vm._v(" "),
                               _c(
-                                "v-list-item-content",
+                                "v-row",
                                 [
-                                  _c("v-list-item-title", [
-                                    _vm._v("Auto-add widgets")
-                                  ]),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12", md: "4" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          rules: _vm.emailRules,
+                                          counter: 10,
+                                          label: "Numero de cuenta bancaria",
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.cc,
+                                          callback: function($$v) {
+                                            _vm.cc = $$v
+                                          },
+                                          expression: "cc"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
                                   _vm._v(" "),
-                                  _c("v-list-item-subtitle", [
-                                    _vm._v(
-                                      "Automatically add home screen widgets"
-                                    )
-                                  ])
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12", md: "4" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          rules: _vm.nameRules,
+                                          counter: 10,
+                                          label: "Forma de pago",
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.pago,
+                                          callback: function($$v) {
+                                            _vm.pago = $$v
+                                          },
+                                          expression: "pago"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-col",
+                                    { attrs: { cols: "12", md: "4" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          rules: _vm.emailRules,
+                                          label: "Observaciones",
+                                          required: ""
+                                        },
+                                        model: {
+                                          value: _vm.notas,
+                                          callback: function($$v) {
+                                            _vm.notas = $$v
+                                          },
+                                          expression: "notas"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
                               )
@@ -45042,9 +45401,7 @@ var render = function() {
             ],
             1
           )
-        ],
-        1
-      )
+        : _vm._e()
     ],
     1
   )

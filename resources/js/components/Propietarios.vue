@@ -8,6 +8,12 @@
         class="elevation-1"
     >
         <template v-slot:top>
+            <v-btn class="ma-2"
+                   outlined color="red"
+                   v-if="data_vivienda"
+                   @click="data_comunidades">
+                <- Regresar
+            </v-btn>
             <v-toolbar-title class="text-center py-2"><h4>{{ title}}</h4></v-toolbar-title>
             <v-toolbar flat color="dark">
                 <v-text-field
@@ -61,66 +67,187 @@
         </template>
     </v-data-table>
 
-    <div>
+    <div v-if="dialog">
         <v-row justify="center">
             <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-                <v-card>
+                <v-card outlined>
                     <v-toolbar dark color="primary">
                         <v-btn icon dark @click="dialog = false">
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
-                        <v-toolbar-title>Settings</v-toolbar-title>
+                        <v-toolbar-title>Vivienda
+                            {{item_vivienda.planta}}
+                            {{item_vivienda.letra}}
+                        </v-toolbar-title>
                         <v-spacer></v-spacer>
-                        <v-toolbar-items>
-                            <v-btn dark text @click="dialog = false">Save</v-btn>
-                        </v-toolbar-items>
                     </v-toolbar>
-                    <v-list three-line subheader>
-                        <v-subheader>User Controls</v-subheader>
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-list-item-title>Content filtering</v-list-item-title>
-                                <v-list-item-subtitle>Set the content filtering level to restrict apps that can be downloaded</v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item>
-                            <v-list-item-content>
-                                <v-list-item-title>Password</v-list-item-title>
-                                <v-list-item-subtitle>Require password for purchase or use password to restrict purchase</v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
-                    <v-divider></v-divider>
-                    <v-list three-line subheader>
-                        <v-subheader>General</v-subheader>
-                        <v-list-item>
-                            <v-list-item-action>
-                                <v-checkbox ></v-checkbox>
-                            </v-list-item-action>
-                            <v-list-item-content>
-                                <v-list-item-title>Notifications</v-list-item-title>
-                                <v-list-item-subtitle>Notify me about updates to apps or games that I downloaded</v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item>
-                            <v-list-item-action>
-                                <v-checkbox ></v-checkbox>
-                            </v-list-item-action>
-                            <v-list-item-content>
-                                <v-list-item-title>Sound</v-list-item-title>
-                                <v-list-item-subtitle>Auto-update apps at any time. Data charges may apply</v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                        <v-list-item>
-                            <v-list-item-action>
-                                <v-checkbox ></v-checkbox>
-                            </v-list-item-action>
-                            <v-list-item-content>
-                                <v-list-item-title>Auto-add widgets</v-list-item-title>
-                                <v-list-item-subtitle>Automatically add home screen widgets</v-list-item-subtitle>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list>
+                 
+                        <v-container>
+                            <v-card-title>
+                                <v-row>
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="nombre"
+                                            :rules="nameRules"
+                                            :counter="10"
+                                            label="Nombre"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="Apellido1"
+                                            :rules="nameRules"
+                                            :counter="10"
+                                            label="Primer Apellido"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="apellido2"
+                                            :rules="namelRules"
+                                            label="Segundo Apellido"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-card-title>
+                            <v-card-subtitle>
+                                <v-row>
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="dni"
+                                            :rules="nameRules"
+                                            :counter="10"
+                                            label="DNI"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="telefono"
+                                            :rules="nameRules"
+                                            :counter="10"
+                                            label="Telefono"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="movil"
+                                            :rules="emailRules"
+                                            label="Movil"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-card-subtitle>
+                            <v-card-text>
+                                <v-row>
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="email"
+                                            :rules="emailRules"
+                                            :counter="10"
+                                            label="Email"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="titulo"
+                                            :rules="nameRules"
+                                            :counter="10"
+                                            label="Titulo"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="cargo"
+                                            :rules="emailRules"
+                                            label="Cargo"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-card-text>
+
+                                <v-row>
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="cc"
+                                            :rules="emailRules"
+                                            :counter="10"
+                                            label="Numero de cuenta bancaria"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="pago"
+                                            :rules="nameRules"
+                                            :counter="10"
+                                            label="Forma de pago"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+
+                                    <v-col
+                                        cols="12"
+                                        md="4"
+                                    >
+                                        <v-text-field
+                                            v-model="notas"
+                                            :rules="emailRules"
+                                            label="Observaciones"
+                                            required
+                                        ></v-text-field>
+                                    </v-col>
+                                </v-row>
+
+                        </v-container>
                 </v-card>
             </v-dialog>
         </v-row>
@@ -132,7 +259,7 @@
     export default {
         data: () => ({
             search: '',
-            title: 'Comunidades',
+            title: 'Selecciona comunidad',
             item_comunidad: null,
             item_vivienda: null,
             data_vivienda: false,
@@ -182,6 +309,30 @@
                         this.title = this.item_comunidad.municipio + ' ' +
                             this.item_comunidad.calle + ',' +
                             this.item_comunidad.numero;
+                    })
+                    .catch(err => {
+                        console.log(err.response.data)
+                    });
+            },
+
+            data_comunidades(){
+                axios.get('/comunidades')
+                    .then(res => {
+                        this.headers = [
+                            {
+                                text: 'Calle',
+                                align: 'left',
+                                value: 'calle',
+                            },
+                            { text: 'Numero', value: 'numero' },
+                            { text: 'Municipio', value: 'municipio' },
+                            { text: 'Provincia', value: 'provincia' },
+                            { text: 'Codigo postal', value: 'codigo_postal'},
+                            { text: 'Actions', value: 'action', sortable: false },
+                        ],
+                        this.desserts = res.data;
+                        this.data_vivienda = false;
+                        this.title = 'Selecciona comunidad';
                     })
                     .catch(err => {
                         console.log(err.response.data)

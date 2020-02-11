@@ -2,22 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3b15edb-57c4-4314-8a9f-d3269bcf179c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Propietarios.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/GeneradorViviendas.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/GeneradorViviendas.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ComunidadController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ComunidadController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ViviendaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ViviendaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_09_210702_create_propietarios_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_09_210702_create_propietarios_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Comunidades.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Comunidades.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/Users.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Users.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/confirm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/confirm.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/verify.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/verify.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Propietarios.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Propietarios.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +206,8 @@
       <workItem from="1581199753121" duration="3653000" />
       <workItem from="1581242586283" duration="17779000" />
       <workItem from="1581272348300" duration="4639000" />
-      <workItem from="1581352717111" duration="5355000" />
+      <workItem from="1581352717111" duration="5537000" />
+      <workItem from="1581446725374" duration="5819000" />
     </task>
     <servers />
   </component>

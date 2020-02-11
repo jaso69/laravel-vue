@@ -530,6 +530,7 @@
             },
 
             generador(){
+                let cont;
                 axios.post('/vivienda', {
                     id: this.editedItem.id,
                     escalera: this.escalera,
@@ -538,7 +539,12 @@
                     letra: this.letra,
                 })
                     .then(res => {
-                        this.viviendass = res.data;
+                        if(res.data.length > 0) {
+                            this.viviendass = res.data;
+                            for (cont = 0; cont <= this.viviendass.length * 4; cont++) {
+                                this.disabled[cont] = true;
+                            }
+                        }
                     })
                     .catch(err => {
                         console.log(err.response.data)
