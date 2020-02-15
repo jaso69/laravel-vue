@@ -3,10 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="f3b15edb-57c4-4314-8a9f-d3269bcf179c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PropietarioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PropietarioController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Propietario.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Propietario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Vivienda.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Vivienda.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_09_210702_create_propietarios_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_09_210702_create_propietarios_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Comunidades.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Comunidades.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Propietarios.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Propietarios.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +31,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -135,19 +141,33 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/js/views" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.Propietarios.vue">
+    <configuration name="Propietarios.vue" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/laravel-vue/resources/js/components/Propietarios.vue" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.Propietarios.vue" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -208,6 +228,15 @@
       <workItem from="1581272348300" duration="4639000" />
       <workItem from="1581352717111" duration="5537000" />
       <workItem from="1581446725374" duration="5819000" />
+      <workItem from="1581541650440" duration="396000" />
+      <workItem from="1581542077478" duration="139000" />
+      <workItem from="1581542341404" duration="1409000" />
+      <workItem from="1581622106962" duration="127000" />
+      <workItem from="1581622269402" duration="354000" />
+      <workItem from="1581622648674" duration="2962000" />
+      <workItem from="1581699387530" duration="12168000" />
+      <workItem from="1581716391346" duration="3380000" />
+      <workItem from="1581763733480" duration="1593000" />
     </task>
     <servers />
   </component>
@@ -215,6 +244,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="606" y="155" width="460" height="749" key="#Propietarios.vue" timestamp="1581622838610">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="606" y="155" width="460" height="749" key="#Propietarios.vue/1680.80.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1581622838610" />
     <state x="493" y="170" width="624" height="554" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1580935992955">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -224,24 +257,44 @@
       <screen x="1024" y="70" width="1366" height="768" />
     </state>
     <state x="1475" y="216" width="524" height="510" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1024.70.1366.768/0.97.1024.671@1024.70.1366.768" timestamp="1578653227758" />
-    <state x="510" y="231" width="651" height="597" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1581258255210">
+    <state x="510" y="231" width="651" height="597" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1581709583190">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="510" y="231" width="651" height="597" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1680.72.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1581258255210" />
+    <state x="510" y="231" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/1680.80.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1581709583190" />
+    <state width="1634" height="255" key="GridCell.Tab.0.bottom" timestamp="1581622594658">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1634" height="255" key="GridCell.Tab.0.bottom/1680.80.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1581622594658" />
+    <state width="1634" height="255" key="GridCell.Tab.0.center" timestamp="1581622594658">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1634" height="255" key="GridCell.Tab.0.center/1680.80.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1581622594658" />
+    <state width="1634" height="255" key="GridCell.Tab.0.left" timestamp="1581622594658">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1634" height="255" key="GridCell.Tab.0.left/1680.80.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1581622594658" />
+    <state width="1634" height="255" key="GridCell.Tab.0.right" timestamp="1581622594658">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1634" height="255" key="GridCell.Tab.0.right/1680.80.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1581622594658" />
     <state x="619" y="281" key="NewPhpClassDialog" timestamp="1581183555361">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="619" y="281" key="NewPhpClassDialog/1680.72.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1581183555361" />
-    <state x="232" y="37" width="1022" height="737" key="SettingsEditor" timestamp="1581101481979">
+    <state x="57" y="31" width="1007" height="733" key="SettingsEditor" timestamp="1581716478778">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="1213" y="97" width="1022" height="737" key="SettingsEditor/1024.70.1366.768/0.97.1024.671@1024.70.1366.768" timestamp="1578656387511" />
     <state x="232" y="37" key="SettingsEditor/1680.72.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1581101481979" />
-    <state x="2054" y="290" key="com.intellij.ide.util.TipDialog" timestamp="1580061465389">
-      <screen x="1680" y="72" width="1366" height="768" />
+    <state x="57" y="31" width="1007" height="733" key="SettingsEditor/1680.80.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1581622624068" />
+    <state x="57" y="31" width="1368" height="739" key="SettingsEditor/1680.80.1366.768/0.0.1680.1050@1680.80.1366.768" timestamp="1581716478778" />
+    <state x="2054" y="298" key="com.intellij.ide.util.TipDialog" timestamp="1581541653927">
+      <screen x="1680" y="80" width="1366" height="768" />
     </state>
     <state x="1398" y="288" key="com.intellij.ide.util.TipDialog/1024.70.1366.768/0.97.1024.671@1024.70.1366.768" timestamp="1578600614798" />
     <state x="2054" y="290" key="com.intellij.ide.util.TipDialog/1680.72.1366.768/0.0.1680.1050@0.0.1680.1050" timestamp="1580061465389" />
+    <state x="2054" y="298" key="com.intellij.ide.util.TipDialog/1680.80.1366.768/0.0.1680.1050@1680.80.1366.768" timestamp="1581541653927" />
     <state x="503" y="231" width="672" height="678" key="search.everywhere.popup" timestamp="1579027239161">
       <screen x="0" y="27" width="1680" height="1023" />
     </state>

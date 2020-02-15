@@ -24,9 +24,10 @@ class CreatePropietariosTable extends Migration
             $table->string('movil')->nullable();
             $table->string('email')->nullable();
             $table->string('cargo')->nullable();
+            $table->string('titulo')->nullable();
             $table->string('cc')->nullable();
             $table->string('pago')->nullable();
-            $table->string('notas')->nullable();
+            $table->text('notas')->nullable();
             $table->timestamps();
         });
     }

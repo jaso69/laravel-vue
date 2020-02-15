@@ -4435,15 +4435,172 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       search: '',
       title: 'Selecciona comunidad',
+      paso1: true,
+      editar: false,
+      dialog_edit: false,
+      id: null,
       item_comunidad: null,
       item_vivienda: null,
       data_vivienda: false,
+      nombre: null,
+      apellido1: null,
+      apellido2: null,
+      dni: null,
+      telefono: null,
+      movil: null,
+      email: null,
+      cargo: null,
+      titulo: null,
+      cc: null,
+      pago: null,
+      notas: null,
       dialog: false,
+      propietario: [],
+      propietarios: [],
       headers: [{
         text: 'Calle',
         align: 'left',
@@ -4478,14 +4635,102 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    seleccion_comunidad: function seleccion_comunidad(item) {
+    editando: function editando(item) {
+      this.propietario = item;
+      this.editar = true;
+      this.nombre = item.nombre;
+      this.apellido1 = item.apellido1;
+      this.apellido2 = item.apellido2;
+      this.dni = item.dni;
+      this.telefono = item.telefono;
+      this.movil = item.movil;
+      this.email = item.email;
+      this.cargo = item.cargo;
+      this.titulo = item.titulo;
+      this.cc = item.cc;
+      this.pago = item.pago;
+      this.notas = item.notas;
+      this.paso1 = false;
+    },
+    borrar: function borrar(item) {
+      this.propietario = item;
+      this.dialog_edit = true;
+    },
+    borrado: function borrado() {
       var _this2 = this;
+
+      axios.post('/propietarios/destroy', {
+        id: this.propietario.id,
+        vivienda_id: this.propietario.vivienda_id
+      }).then(function (res) {
+        _this2.propietarios = res.data;
+        _this2.id = null;
+        _this2.dialog_edit = false;
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    },
+    guardar: function guardar() {
+      var _this3 = this;
+
+      if (this.editar) {
+        axios.post('/propietarios/update', {
+          id: this.propietario.id,
+          vivienda_id: this.propietario.vivienda_id,
+          nombre: this.nombre,
+          apellido1: this.apellido1,
+          apellido2: this.apellido2,
+          dni: this.dni,
+          telefono: this.telefono,
+          movil: this.movil,
+          email: this.email,
+          cargo: this.cargo,
+          titulo: this.titulo,
+          cc: this.cc,
+          pago: this.pago,
+          notas: this.notas
+        }).then(function (res) {
+          _this3.propietarios = res.data;
+          _this3.propietario = null;
+          _this3.paso1 = true;
+
+          _this3.limpiar();
+        })["catch"](function (err) {
+          console.log(err.response.data);
+        });
+      } else {
+        axios.post('/propietarios/store', {
+          vivienda_id: this.item_vivienda.id,
+          nombre: this.nombre,
+          apellido1: this.apellido1,
+          apellido2: this.apellido2,
+          dni: this.dni,
+          telefono: this.telefono,
+          movil: this.movil,
+          email: this.email,
+          cargo: this.cargo,
+          titulo: this.titulo,
+          cc: this.cc,
+          pago: this.pago,
+          notas: this.notas
+        }).then(function (res) {
+          _this3.propietarios = res.data;
+          _this3.paso1 = true;
+
+          _this3.limpiar();
+        })["catch"](function (err) {
+          console.log(err.response.data);
+        });
+      }
+    },
+    seleccion_comunidad: function seleccion_comunidad(item) {
+      var _this4 = this;
 
       this.item_comunidad = item;
       axios.post('/viviendas', {
         id: this.item_comunidad.id
       }).then(function (res) {
-        _this2.headers = [{
+        _this4.headers = [{
           text: 'Tipo vivienda',
           align: 'left',
           value: 'tipo'
@@ -4503,18 +4748,18 @@ __webpack_require__.r(__webpack_exports__);
           value: 'action',
           sortable: false
         }];
-        _this2.desserts = res.data;
-        _this2.data_vivienda = true;
-        _this2.title = _this2.item_comunidad.municipio + ' ' + _this2.item_comunidad.calle + ',' + _this2.item_comunidad.numero;
+        _this4.desserts = res.data;
+        _this4.data_vivienda = true;
+        _this4.title = _this4.item_comunidad.municipio + ' ' + _this4.item_comunidad.calle + ',' + _this4.item_comunidad.numero;
       })["catch"](function (err) {
         console.log(err.response.data);
       });
     },
     data_comunidades: function data_comunidades() {
-      var _this3 = this;
+      var _this5 = this;
 
       axios.get('/comunidades').then(function (res) {
-        _this3.headers = [{
+        _this5.headers = [{
           text: 'Calle',
           align: 'left',
           value: 'calle'
@@ -4534,16 +4779,45 @@ __webpack_require__.r(__webpack_exports__);
           text: 'Actions',
           value: 'action',
           sortable: false
-        }], _this3.desserts = res.data;
-        _this3.data_vivienda = false;
-        _this3.title = 'Selecciona comunidad';
+        }], _this5.desserts = res.data;
+        _this5.data_vivienda = false;
+        _this5.title = 'Selecciona comunidad';
       })["catch"](function (err) {
         console.log(err.response.data);
       });
     },
     add_propietarios: function add_propietarios(item) {
+      var _this6 = this;
+
       this.item_vivienda = item;
-      this.dialog = true;
+      axios.post('/propietarios/', {
+        vivienda_id: this.item_vivienda.id
+      }).then(function (res) {
+        _this6.propietarios = res.data;
+        console.log(res.data);
+        _this6.dialog = true;
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    },
+    limpiar: function limpiar() {
+      this.editar = false;
+      this.nombre = null;
+      this.apellido1 = null;
+      this.apellido2 = null;
+      this.dni = null;
+      this.telefono = null;
+      this.movil = null;
+      this.email = null;
+      this.cargo = null;
+      this.titulo = null;
+      this.cc = null;
+      this.pago = null;
+      this.notas = null;
+    },
+    cancelar: function cancelar() {
+      this.limpiar();
+      this.paso1 = true;
     }
   }
 });
@@ -44966,7 +45240,7 @@ var render = function() {
                                     ),
                                     [
                                       _vm._v(
-                                        "\n                        mdi-account-plus\n                    "
+                                        "\n                        mdi-account\n                    "
                                       )
                                     ]
                                   )
@@ -45039,7 +45313,7 @@ var render = function() {
                         [
                           _c(
                             "v-toolbar",
-                            { attrs: { dark: "", color: "primary" } },
+                            { attrs: { dark: "", color: "dark" } },
                             [
                               _c(
                                 "v-btn",
@@ -45055,6 +45329,8 @@ var render = function() {
                                 1
                               ),
                               _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
                               _c("v-toolbar-title", [
                                 _vm._v(
                                   "Vivienda\n                            " +
@@ -45065,330 +45341,716 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(" "),
-                              _c("v-spacer")
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _c(
+                                "v-toolbar-items",
+                                [
+                                  !_vm.paso1
+                                    ? _c(
+                                        "v-btn",
+                                        {
+                                          staticClass: "mx-6",
+                                          attrs: { color: "red" },
+                                          on: { click: _vm.cancelar }
+                                        },
+                                        [
+                                          _c("v-icon", [_vm._v("mdi-cancel")]),
+                                          _vm._v(
+                                            "\n                                Cancelar\n                            "
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  !_vm.paso1
+                                    ? _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { color: "green" },
+                                          on: { click: _vm.guardar }
+                                        },
+                                        [
+                                          _c("v-icon", [
+                                            _vm._v("mdi-content-save")
+                                          ]),
+                                          _vm._v(
+                                            "\n                                Guardar\n                            "
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.paso1
+                                    ? _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { color: "primary" },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.paso1 = false
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("v-icon", [
+                                            _vm._v("mdi-content-save")
+                                          ]),
+                                          _vm._v(
+                                            "\n                                Nuevo\n                            "
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              )
                             ],
                             1
                           ),
                           _vm._v(" "),
-                          _c(
-                            "v-container",
-                            [
-                              _c(
-                                "v-card-title",
+                          !_vm.paso1
+                            ? _c(
+                                "v-container",
                                 [
                                   _c(
-                                    "v-row",
+                                    "v-card",
+                                    { staticClass: "my-2" },
                                     [
-                                      _c(
-                                        "v-col",
-                                        { attrs: { cols: "12", md: "4" } },
-                                        [
-                                          _c("v-text-field", {
-                                            attrs: {
-                                              rules: _vm.nameRules,
-                                              counter: 10,
-                                              label: "Nombre",
-                                              required: ""
-                                            },
-                                            model: {
-                                              value: _vm.nombre,
-                                              callback: function($$v) {
-                                                _vm.nombre = $$v
-                                              },
-                                              expression: "nombre"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
+                                      _c("v-card-title", [_vm._v("Nombre")]),
                                       _vm._v(" "),
                                       _c(
-                                        "v-col",
-                                        { attrs: { cols: "12", md: "4" } },
+                                        "v-card-text",
                                         [
-                                          _c("v-text-field", {
-                                            attrs: {
-                                              rules: _vm.nameRules,
-                                              counter: 10,
-                                              label: "Primer Apellido",
-                                              required: ""
-                                            },
-                                            model: {
-                                              value: _vm.Apellido1,
-                                              callback: function($$v) {
-                                                _vm.Apellido1 = $$v
-                                              },
-                                              expression: "Apellido1"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-col",
-                                        { attrs: { cols: "12", md: "4" } },
-                                        [
-                                          _c("v-text-field", {
-                                            attrs: {
-                                              rules: _vm.namelRules,
-                                              label: "Segundo Apellido",
-                                              required: ""
-                                            },
-                                            model: {
-                                              value: _vm.apellido2,
-                                              callback: function($$v) {
-                                                _vm.apellido2 = $$v
-                                              },
-                                              expression: "apellido2"
-                                            }
-                                          })
+                                          _c(
+                                            "v-row",
+                                            [
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.nameRules,
+                                                      counter: 10,
+                                                      label: "Nombre",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.nombre,
+                                                      callback: function($$v) {
+                                                        _vm.nombre = $$v
+                                                      },
+                                                      expression: "nombre"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.nameRules,
+                                                      counter: 10,
+                                                      label: "Primer Apellido",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.apellido1,
+                                                      callback: function($$v) {
+                                                        _vm.apellido1 = $$v
+                                                      },
+                                                      expression: "apellido1"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.namelRules,
+                                                      label: "Segundo Apellido",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.apellido2,
+                                                      callback: function($$v) {
+                                                        _vm.apellido2 = $$v
+                                                      },
+                                                      expression: "apellido2"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          )
                                         ],
                                         1
                                       )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-card-subtitle",
-                                [
-                                  _c(
-                                    "v-row",
-                                    [
-                                      _c(
-                                        "v-col",
-                                        { attrs: { cols: "12", md: "4" } },
-                                        [
-                                          _c("v-text-field", {
-                                            attrs: {
-                                              rules: _vm.nameRules,
-                                              counter: 10,
-                                              label: "DNI",
-                                              required: ""
-                                            },
-                                            model: {
-                                              value: _vm.dni,
-                                              callback: function($$v) {
-                                                _vm.dni = $$v
-                                              },
-                                              expression: "dni"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-col",
-                                        { attrs: { cols: "12", md: "4" } },
-                                        [
-                                          _c("v-text-field", {
-                                            attrs: {
-                                              rules: _vm.nameRules,
-                                              counter: 10,
-                                              label: "Telefono",
-                                              required: ""
-                                            },
-                                            model: {
-                                              value: _vm.telefono,
-                                              callback: function($$v) {
-                                                _vm.telefono = $$v
-                                              },
-                                              expression: "telefono"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-col",
-                                        { attrs: { cols: "12", md: "4" } },
-                                        [
-                                          _c("v-text-field", {
-                                            attrs: {
-                                              rules: _vm.emailRules,
-                                              label: "Movil",
-                                              required: ""
-                                            },
-                                            model: {
-                                              value: _vm.movil,
-                                              callback: function($$v) {
-                                                _vm.movil = $$v
-                                              },
-                                              expression: "movil"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-card-text",
-                                [
-                                  _c(
-                                    "v-row",
-                                    [
-                                      _c(
-                                        "v-col",
-                                        { attrs: { cols: "12", md: "4" } },
-                                        [
-                                          _c("v-text-field", {
-                                            attrs: {
-                                              rules: _vm.emailRules,
-                                              counter: 10,
-                                              label: "Email",
-                                              required: ""
-                                            },
-                                            model: {
-                                              value: _vm.email,
-                                              callback: function($$v) {
-                                                _vm.email = $$v
-                                              },
-                                              expression: "email"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-col",
-                                        { attrs: { cols: "12", md: "4" } },
-                                        [
-                                          _c("v-text-field", {
-                                            attrs: {
-                                              rules: _vm.nameRules,
-                                              counter: 10,
-                                              label: "Titulo",
-                                              required: ""
-                                            },
-                                            model: {
-                                              value: _vm.titulo,
-                                              callback: function($$v) {
-                                                _vm.titulo = $$v
-                                              },
-                                              expression: "titulo"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-col",
-                                        { attrs: { cols: "12", md: "4" } },
-                                        [
-                                          _c("v-text-field", {
-                                            attrs: {
-                                              rules: _vm.emailRules,
-                                              label: "Cargo",
-                                              required: ""
-                                            },
-                                            model: {
-                                              value: _vm.cargo,
-                                              callback: function($$v) {
-                                                _vm.cargo = $$v
-                                              },
-                                              expression: "cargo"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
-                                    ],
-                                    1
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-row",
-                                [
-                                  _c(
-                                    "v-col",
-                                    { attrs: { cols: "12", md: "4" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          rules: _vm.emailRules,
-                                          counter: 10,
-                                          label: "Numero de cuenta bancaria",
-                                          required: ""
-                                        },
-                                        model: {
-                                          value: _vm.cc,
-                                          callback: function($$v) {
-                                            _vm.cc = $$v
-                                          },
-                                          expression: "cc"
-                                        }
-                                      })
                                     ],
                                     1
                                   ),
                                   _vm._v(" "),
                                   _c(
-                                    "v-col",
-                                    { attrs: { cols: "12", md: "4" } },
+                                    "v-card",
+                                    { staticClass: "my-2" },
                                     [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          rules: _vm.nameRules,
-                                          counter: 10,
-                                          label: "Forma de pago",
-                                          required: ""
-                                        },
-                                        model: {
-                                          value: _vm.pago,
-                                          callback: function($$v) {
-                                            _vm.pago = $$v
-                                          },
-                                          expression: "pago"
-                                        }
-                                      })
+                                      _c("v-card-title", [
+                                        _vm._v("DNI y contacto")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-card-text",
+                                        [
+                                          _c(
+                                            "v-row",
+                                            [
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.nameRules,
+                                                      counter: 10,
+                                                      label: "DNI",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.dni,
+                                                      callback: function($$v) {
+                                                        _vm.dni = $$v
+                                                      },
+                                                      expression: "dni"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.nameRules,
+                                                      counter: 10,
+                                                      label: "Telefono",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.telefono,
+                                                      callback: function($$v) {
+                                                        _vm.telefono = $$v
+                                                      },
+                                                      expression: "telefono"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.emailRules,
+                                                      label: "Movil",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.movil,
+                                                      callback: function($$v) {
+                                                        _vm.movil = $$v
+                                                      },
+                                                      expression: "movil"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   ),
                                   _vm._v(" "),
                                   _c(
-                                    "v-col",
-                                    { attrs: { cols: "12", md: "4" } },
+                                    "v-card",
+                                    { staticClass: "my-2" },
                                     [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          rules: _vm.emailRules,
-                                          label: "Observaciones",
-                                          required: ""
-                                        },
-                                        model: {
-                                          value: _vm.notas,
-                                          callback: function($$v) {
-                                            _vm.notas = $$v
-                                          },
-                                          expression: "notas"
-                                        }
-                                      })
+                                      _c("v-card-title", [
+                                        _vm._v("Email y cargo")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-card-text",
+                                        [
+                                          _c(
+                                            "v-row",
+                                            [
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.emailRules,
+                                                      counter: 10,
+                                                      label: "Email",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.email,
+                                                      callback: function($$v) {
+                                                        _vm.email = $$v
+                                                      },
+                                                      expression: "email"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.nameRules,
+                                                      counter: 10,
+                                                      label: "Titulo",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.titulo,
+                                                      callback: function($$v) {
+                                                        _vm.titulo = $$v
+                                                      },
+                                                      expression: "titulo"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.emailRules,
+                                                      label: "Cargo",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.cargo,
+                                                      callback: function($$v) {
+                                                        _vm.cargo = $$v
+                                                      },
+                                                      expression: "cargo"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-card",
+                                    { staticClass: "my-2" },
+                                    [
+                                      _c("v-card-title", [
+                                        _vm._v(
+                                          "Datos bancarios y observaciones"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-card-text",
+                                        [
+                                          _c(
+                                            "v-row",
+                                            [
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.emailRules,
+                                                      counter: 10,
+                                                      label:
+                                                        "Numero de cuenta bancaria",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.cc,
+                                                      callback: function($$v) {
+                                                        _vm.cc = $$v
+                                                      },
+                                                      expression: "cc"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.nameRules,
+                                                      counter: 10,
+                                                      label: "Forma de pago",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.pago,
+                                                      callback: function($$v) {
+                                                        _vm.pago = $$v
+                                                      },
+                                                      expression: "pago"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "v-col",
+                                                {
+                                                  attrs: { cols: "12", md: "4" }
+                                                },
+                                                [
+                                                  _c("v-text-field", {
+                                                    attrs: {
+                                                      outlined: "",
+                                                      rules: _vm.emailRules,
+                                                      label: "Observaciones",
+                                                      required: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.notas,
+                                                      callback: function($$v) {
+                                                        _vm.notas = $$v
+                                                      },
+                                                      expression: "notas"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
                                 ],
                                 1
                               )
-                            ],
-                            1
-                          )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.paso1
+                            ? _c("v-simple-table", {
+                                scopedSlots: _vm._u(
+                                  [
+                                    {
+                                      key: "default",
+                                      fn: function() {
+                                        return [
+                                          _c("thead", [
+                                            _c("tr", [
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("Nombre")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("1º Apellido")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("2º Apellido")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("DNI")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("Telefono")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("Movil")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("Email")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("Cargo")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("Relacion")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("Cuenta banco")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("Forma de pago")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("Observaciones")]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "th",
+                                                { staticClass: "text-left" },
+                                                [_vm._v("Acciones")]
+                                              )
+                                            ])
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "tbody",
+                                            _vm._l(_vm.propietarios, function(
+                                              item
+                                            ) {
+                                              return _c(
+                                                "tr",
+                                                { key: item.id },
+                                                [
+                                                  _c("td", [
+                                                    _vm._v(_vm._s(item.nombre))
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("td", [
+                                                    _vm._v(
+                                                      _vm._s(item.apellido1)
+                                                    )
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("td", [
+                                                    _vm._v(
+                                                      _vm._s(item.apellido2)
+                                                    )
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("td", [
+                                                    _vm._v(_vm._s(item.dni))
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("td", [
+                                                    _vm._v(
+                                                      _vm._s(item.telefono)
+                                                    )
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("td", [
+                                                    _vm._v(_vm._s(item.movil))
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("td", [
+                                                    _vm._v(_vm._s(item.email))
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("td", [
+                                                    _vm._v(_vm._s(item.cargo))
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("td", [
+                                                    _vm._v(_vm._s(item.titulo))
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("td", [
+                                                    _vm._v(_vm._s(item.cc))
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("td", [
+                                                    _vm._v(_vm._s(item.pago))
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c("td", [
+                                                    _vm._v(_vm._s(item.notas))
+                                                  ]),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "td",
+                                                    [
+                                                      _c(
+                                                        "v-icon",
+                                                        _vm._g(
+                                                          {
+                                                            staticClass: "mr-2",
+                                                            attrs: {
+                                                              dark: "",
+                                                              color: "cyan"
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.editando(
+                                                                  item
+                                                                )
+                                                              }
+                                                            }
+                                                          },
+                                                          _vm.on
+                                                        ),
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                            mdi-pencil\n                                        "
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "v-icon",
+                                                        _vm._g(
+                                                          {
+                                                            staticClass: "mr-2",
+                                                            attrs: {
+                                                              dark: "",
+                                                              color: "red"
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.borrar(
+                                                                  item
+                                                                )
+                                                              }
+                                                            }
+                                                          },
+                                                          _vm.on
+                                                        ),
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                            mdi-delete\n                                        "
+                                                          )
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ]
+                                              )
+                                            }),
+                                            0
+                                          )
+                                        ]
+                                      },
+                                      proxy: true
+                                    }
+                                  ],
+                                  null,
+                                  false,
+                                  4019281361
+                                )
+                              })
+                            : _vm._e()
                         ],
                         1
                       )
@@ -45401,7 +46063,69 @@ var render = function() {
             ],
             1
           )
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { "max-width": "390" },
+          model: {
+            value: _vm.dialog_edit,
+            callback: function($$v) {
+              _vm.dialog_edit = $$v
+            },
+            expression: "dialog_edit"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c("v-card-title", { staticClass: "headline" }, [
+                _vm._v("Aviso de borrado de propietario")
+              ]),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "\n                Seguro deseas borrar este propietario ??.\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "green darken-1", text: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialog_edit = false
+                        }
+                      }
+                    },
+                    [_vm._v("\n                    Cancelar\n                ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red", text: "" },
+                      on: { click: _vm.borrado }
+                    },
+                    [_vm._v("\n                    Borrar\n                ")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )

@@ -43,6 +43,14 @@ Route::post('/vivienda/update', 'ViviendaController@update')->middleware('auth:a
 
 Route::post('/vivienda/destroy', 'ViviendaController@destroy')->middleware('auth:api');
 
+Route::post('/propietarios/store', 'PropietarioController@store')->middleware('auth:api');
+
+Route::post('/propietarios/update', 'PropietarioController@update')->middleware('auth:api');
+
+Route::post('/propietarios/destroy', 'PropietarioController@destroy')->middleware('auth:api');
+
+Route::post('/propietarios/', 'PropietarioController@index')->middleware('auth:api');
+
 Route::post('/gasto', 'GastoController@store')->middleware('auth:api');
 
 Route::get('/gasto', 'GastoController@index')->middleware('auth:api');
