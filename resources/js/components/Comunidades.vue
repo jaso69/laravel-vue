@@ -80,6 +80,21 @@
                             v-on="on"
                             dark
                             class="mr-2"
+                            color="warning"
+                            @click="dialog_config = true"
+                        >
+                            mdi-home-plus
+                        </v-icon>
+                    </template>
+                    <span class="warning p-2">Configuracion</span>
+                </v-tooltip>
+
+                <v-tooltip left>
+                    <template v-slot:activator="{ on }">
+                        <v-icon
+                            v-on="on"
+                            dark
+                            class="mr-2"
                             color="success"
                             @click="viviendas(item)"
                         >
@@ -155,7 +170,7 @@
                     </v-btn>
                 </v-card-actions>
             </v-card>
-        </v-dialog>
+        </v-dialog> <!--Dialog borrar comunidad -->
 
         <v-dialog
             v-model="dialogoVivienda"
@@ -188,7 +203,7 @@
                     </v-btn>
                 </v-card-actions>
             </v-card>
-        </v-dialog>
+        </v-dialog>  <!--Dialog borrar vivienda -->
 
        <div>
            <v-row justify="center">
@@ -410,7 +425,121 @@
                    </v-card>
                </v-dialog>
            </v-row>
-       </div>
+       </div> <!--Dialog generarr vivienda -->
+
+        <div v-if="dialog_config">
+            <v-row justify="center">
+                <v-dialog v-model="dialog_config" fullscreen hide-overlay transition="dialog-bottom-transition">
+                    <v-card>
+                        <v-toolbar dark color="warning">
+                            <v-btn icon dark @click="dialog_config = false">
+                                <v-icon>mdi-close</v-icon>
+                            </v-btn>
+                            <v-toolbar-title>Settings</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-toolbar-items>
+                                <v-btn dark text @click="dialog_config = false">Save</v-btn>
+                            </v-toolbar-items>
+                        </v-toolbar>
+                        <v-card>
+                            <v-card-title>Selecciona</v-card-title>
+                            <v-card-actions>
+                                <v-row>
+                                    <v-col cols="12" sm="3" md="2">
+
+                                        <v-switch
+                                            class="mx-2"
+                                            label="Ascensores"
+                                            v-model="ascensores"
+                                        >
+
+                                        </v-switch>
+
+                                    </v-col>
+                                    <v-col cols="12" sm="3" md="2">
+                                        <v-switch
+                                            class="mx-2"
+                                            label="Garajes"
+                                            v-model="garajes">
+
+                                        </v-switch>
+                                    </v-col>
+                                    <v-col cols="12" sm="3" md="2">
+                                        <v-switch
+                                            class="mx-2"
+                                            label="Piscina"
+                                            v-model="piscina">
+
+                                        </v-switch>
+                                    </v-col>
+                                    <v-col cols="12" sm="3" md="2">
+                                        <v-switch
+                                            class="mx-2"
+                                            label="Gimnasio"
+                                            v-model="gimnasio">
+
+                                        </v-switch>
+                                    </v-col>
+                                    <v-col cols="12" sm="3" md="2">
+                                        <v-switch
+                                            class="mx-2"
+                                            label="Jardines"
+                                            v-model="jardines">
+
+                                        </v-switch>
+                                    </v-col>
+                                    <v-col cols="12" sm="3" md="2">
+                                        <v-switch
+                                            class="mx-2"
+                                            label="Zona de ocio"
+                                            v-model="zona_ocio">
+
+                                        </v-switch>
+                                    </v-col>
+                                </v-row>
+                            </v-card-actions>
+                        </v-card>
+
+                        <v-card v-if="ascensores || garajes">
+                            <v-card-title>Opciones</v-card-title>
+                            <v-card-text>
+                                <v-row>
+                                    <v-col class="d-flex" cols="12" sm="3" v-if="ascensores">
+                                        <v-select
+                                            :items="plantas"
+                                            v-model="ascensor"
+                                            label="Numero de ascensores"
+                                            outlined
+                                        ></v-select>
+                                    </v-col>
+                                    <v-col class="d-flex" cols="12" sm="3" v-if="garajes">
+                                        <v-select
+                                            :items="plantas"
+                                            v-model="plazas_garaje"
+                                            label="Numero de plazas garaje"
+                                            outlined
+                                        ></v-select>
+                                    </v-col>
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
+                        <v-card-actions v-if="garajes ||
+                                                ascensores ||
+                                                piscina ||
+                                                gimnasio ||
+                                                jardines ||
+                                                zona_ocio">
+                            <v-btn @click=""
+                                   color="green">
+                                <v-icon>mdi-content-save</v-icon>
+                                Guardar
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+            </v-row>
+        </div> <!--Dialog configurar comunidad -->
+
     </div>
 </template>
 
@@ -418,8 +547,17 @@
     export default {
         data: () => ({
             dialog: false,
+            dialog_config: false,
             dialog_viviendas: false,
             editing_viviendas: false,
+            ascensores: false,
+            garajes:false,
+            ascensor: null,
+            plazas_garaje: null,
+            piscina: false,
+            gimnasio: false,
+            jardines: false,
+            zona_ocio: false,
             search: '',
             disabled: [],
             eliminar: null,

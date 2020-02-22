@@ -221,27 +221,25 @@
                                             cols="12"
                                             md="4"
                                         >
-                                            <v-text-field
-                                                outlined
+                                            <v-select
+                                                :items="select_relacion"
                                                 v-model="titulo"
-                                                :rules="nameRules"
-                                                :counter="10"
-                                                label="Titulo"
-                                                required
-                                            ></v-text-field>
+                                                label="Relacion"
+                                                outlined
+                                            ></v-select>
+
                                         </v-col>
 
                                         <v-col
                                             cols="12"
                                             md="4"
                                         >
-                                            <v-text-field
-                                                outlined
+                                            <v-select
+                                                :items="select_cargo"
                                                 v-model="cargo"
-                                                :rules="emailRules"
                                                 label="Cargo"
-                                                required
-                                            ></v-text-field>
+                                                outlined
+                                            ></v-select>
                                         </v-col>
                                     </v-row>
                                 </v-card-text>
@@ -414,6 +412,8 @@
             movil: null,
             email: null,
             cargo: null,
+            select_relacion: ['Propietario','Familiar','Inquilino','otros'],
+            select_cargo: ['Vecino','Presidente', 'Vicepresidente', 'Vocal', 'otros'],
             titulo: null,
             cc: null,
             pago: null,

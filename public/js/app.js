@@ -3372,12 +3372,150 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dialog: false,
+      dialog_config: false,
       dialog_viviendas: false,
       editing_viviendas: false,
+      ascensores: false,
+      garajes: false,
+      ascensor: null,
+      plazas_garaje: null,
+      piscina: false,
+      gimnasio: false,
+      jardines: false,
+      zona_ocio: false,
       search: '',
       disabled: [],
       eliminar: null,
@@ -4572,8 +4710,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4594,6 +4730,8 @@ __webpack_require__.r(__webpack_exports__);
       movil: null,
       email: null,
       cargo: null,
+      select_relacion: ['Propietario', 'Familiar', 'Inquilino', 'otros'],
+      select_cargo: ['Vecino', 'Presidente', 'Vicepresidente', 'Vocal', 'otros'],
       titulo: null,
       cc: null,
       pago: null,
@@ -43277,6 +43415,53 @@ var render = function() {
                                 _vm._g(
                                   {
                                     staticClass: "mr-2",
+                                    attrs: { dark: "", color: "warning" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.dialog_config = true
+                                      }
+                                    }
+                                  },
+                                  on
+                                ),
+                                [
+                                  _vm._v(
+                                    "\n                        mdi-home-plus\n                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          }
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _vm._v(" "),
+                    _c("span", { staticClass: "warning p-2" }, [
+                      _vm._v("Configuracion")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-tooltip",
+                  {
+                    attrs: { left: "" },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "activator",
+                          fn: function(ref) {
+                            var on = ref.on
+                            return [
+                              _c(
+                                "v-icon",
+                                _vm._g(
+                                  {
+                                    staticClass: "mr-2",
                                     attrs: { dark: "", color: "success" },
                                     on: {
                                       click: function($event) {
@@ -44384,7 +44569,371 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _vm.dialog_config
+        ? _c(
+            "div",
+            [
+              _c(
+                "v-row",
+                { attrs: { justify: "center" } },
+                [
+                  _c(
+                    "v-dialog",
+                    {
+                      attrs: {
+                        fullscreen: "",
+                        "hide-overlay": "",
+                        transition: "dialog-bottom-transition"
+                      },
+                      model: {
+                        value: _vm.dialog_config,
+                        callback: function($$v) {
+                          _vm.dialog_config = $$v
+                        },
+                        expression: "dialog_config"
+                      }
+                    },
+                    [
+                      _c(
+                        "v-card",
+                        [
+                          _c(
+                            "v-toolbar",
+                            { attrs: { dark: "", color: "warning" } },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  attrs: { icon: "", dark: "" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.dialog_config = false
+                                    }
+                                  }
+                                },
+                                [_c("v-icon", [_vm._v("mdi-close")])],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-toolbar-title", [_vm._v("Settings")]),
+                              _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _c(
+                                "v-toolbar-items",
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { dark: "", text: "" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.dialog_config = false
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Save")]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-card",
+                            [
+                              _c("v-card-title", [_vm._v("Selecciona")]),
+                              _vm._v(" "),
+                              _c(
+                                "v-card-actions",
+                                [
+                                  _c(
+                                    "v-row",
+                                    [
+                                      _c(
+                                        "v-col",
+                                        {
+                                          attrs: {
+                                            cols: "12",
+                                            sm: "3",
+                                            md: "2"
+                                          }
+                                        },
+                                        [
+                                          _c("v-switch", {
+                                            staticClass: "mx-2",
+                                            attrs: { label: "Ascensores" },
+                                            model: {
+                                              value: _vm.ascensores,
+                                              callback: function($$v) {
+                                                _vm.ascensores = $$v
+                                              },
+                                              expression: "ascensores"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        {
+                                          attrs: {
+                                            cols: "12",
+                                            sm: "3",
+                                            md: "2"
+                                          }
+                                        },
+                                        [
+                                          _c("v-switch", {
+                                            staticClass: "mx-2",
+                                            attrs: { label: "Garajes" },
+                                            model: {
+                                              value: _vm.garajes,
+                                              callback: function($$v) {
+                                                _vm.garajes = $$v
+                                              },
+                                              expression: "garajes"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        {
+                                          attrs: {
+                                            cols: "12",
+                                            sm: "3",
+                                            md: "2"
+                                          }
+                                        },
+                                        [
+                                          _c("v-switch", {
+                                            staticClass: "mx-2",
+                                            attrs: { label: "Piscina" },
+                                            model: {
+                                              value: _vm.piscina,
+                                              callback: function($$v) {
+                                                _vm.piscina = $$v
+                                              },
+                                              expression: "piscina"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        {
+                                          attrs: {
+                                            cols: "12",
+                                            sm: "3",
+                                            md: "2"
+                                          }
+                                        },
+                                        [
+                                          _c("v-switch", {
+                                            staticClass: "mx-2",
+                                            attrs: { label: "Gimnasio" },
+                                            model: {
+                                              value: _vm.gimnasio,
+                                              callback: function($$v) {
+                                                _vm.gimnasio = $$v
+                                              },
+                                              expression: "gimnasio"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        {
+                                          attrs: {
+                                            cols: "12",
+                                            sm: "3",
+                                            md: "2"
+                                          }
+                                        },
+                                        [
+                                          _c("v-switch", {
+                                            staticClass: "mx-2",
+                                            attrs: { label: "Jardines" },
+                                            model: {
+                                              value: _vm.jardines,
+                                              callback: function($$v) {
+                                                _vm.jardines = $$v
+                                              },
+                                              expression: "jardines"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        {
+                                          attrs: {
+                                            cols: "12",
+                                            sm: "3",
+                                            md: "2"
+                                          }
+                                        },
+                                        [
+                                          _c("v-switch", {
+                                            staticClass: "mx-2",
+                                            attrs: { label: "Zona de ocio" },
+                                            model: {
+                                              value: _vm.zona_ocio,
+                                              callback: function($$v) {
+                                                _vm.zona_ocio = $$v
+                                              },
+                                              expression: "zona_ocio"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm.ascensores || _vm.garajes
+                            ? _c(
+                                "v-card",
+                                [
+                                  _c("v-card-title", [_vm._v("Opciones")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-card-text",
+                                    [
+                                      _c(
+                                        "v-row",
+                                        [
+                                          _vm.ascensores
+                                            ? _c(
+                                                "v-col",
+                                                {
+                                                  staticClass: "d-flex",
+                                                  attrs: { cols: "12", sm: "3" }
+                                                },
+                                                [
+                                                  _c("v-select", {
+                                                    attrs: {
+                                                      items: _vm.plantas,
+                                                      label:
+                                                        "Numero de ascensores",
+                                                      outlined: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.ascensor,
+                                                      callback: function($$v) {
+                                                        _vm.ascensor = $$v
+                                                      },
+                                                      expression: "ascensor"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.garajes
+                                            ? _c(
+                                                "v-col",
+                                                {
+                                                  staticClass: "d-flex",
+                                                  attrs: { cols: "12", sm: "3" }
+                                                },
+                                                [
+                                                  _c("v-select", {
+                                                    attrs: {
+                                                      items: _vm.plantas,
+                                                      label:
+                                                        "Numero de plazas garaje",
+                                                      outlined: ""
+                                                    },
+                                                    model: {
+                                                      value: _vm.plazas_garaje,
+                                                      callback: function($$v) {
+                                                        _vm.plazas_garaje = $$v
+                                                      },
+                                                      expression:
+                                                        "plazas_garaje"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            : _vm._e()
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.garajes ||
+                          _vm.ascensores ||
+                          _vm.piscina ||
+                          _vm.gimnasio ||
+                          _vm.jardines ||
+                          _vm.zona_ocio
+                            ? _c(
+                                "v-card-actions",
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { color: "green" },
+                                      on: { click: function($event) {} }
+                                    },
+                                    [
+                                      _c("v-icon", [
+                                        _vm._v("mdi-content-save")
+                                      ]),
+                                      _vm._v(
+                                        "\n                            Guardar\n                        "
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _vm._e()
     ],
     1
   )
@@ -45660,13 +46209,12 @@ var render = function() {
                                                   attrs: { cols: "12", md: "4" }
                                                 },
                                                 [
-                                                  _c("v-text-field", {
+                                                  _c("v-select", {
                                                     attrs: {
-                                                      outlined: "",
-                                                      rules: _vm.nameRules,
-                                                      counter: 10,
-                                                      label: "Titulo",
-                                                      required: ""
+                                                      items:
+                                                        _vm.select_relacion,
+                                                      label: "Relacion",
+                                                      outlined: ""
                                                     },
                                                     model: {
                                                       value: _vm.titulo,
@@ -45686,12 +46234,11 @@ var render = function() {
                                                   attrs: { cols: "12", md: "4" }
                                                 },
                                                 [
-                                                  _c("v-text-field", {
+                                                  _c("v-select", {
                                                     attrs: {
-                                                      outlined: "",
-                                                      rules: _vm.emailRules,
+                                                      items: _vm.select_cargo,
                                                       label: "Cargo",
-                                                      required: ""
+                                                      outlined: ""
                                                     },
                                                     model: {
                                                       value: _vm.cargo,

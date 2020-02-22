@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3b15edb-57c4-4314-8a9f-d3269bcf179c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.directory" beforeDir="false" afterPath="$PROJECT_DIR$/.directory" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PropietarioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PropietarioController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Propietario.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Propietario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Vivienda.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Vivienda.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_09_210702_create_propietarios_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_09_210702_create_propietarios_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Comunidad.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Comunidad.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Comunidades.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Comunidades.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/Propietarios.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Propietarios.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +234,10 @@
       <workItem from="1581622648674" duration="2962000" />
       <workItem from="1581699387530" duration="12168000" />
       <workItem from="1581716391346" duration="3380000" />
-      <workItem from="1581763733480" duration="1593000" />
+      <workItem from="1581763733480" duration="3169000" />
+      <workItem from="1581850215111" duration="8148000" />
+      <workItem from="1582219061947" duration="1201000" />
+      <workItem from="1582308660151" duration="605000" />
     </task>
     <servers />
   </component>
